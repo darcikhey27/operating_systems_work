@@ -1,0 +1,61 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ACTOR_H_	movies/actor.h	2;"	d
+Actor	movies/actor.h	/^typedef struct actor Actor;$/;"	t	typeref:struct:actor
+CC	Makefile	/^CC=gcc$/;"	m
+EXE	Makefile	/^EXE = lab3$/;"	m
+FILEUTIL_H	utils/fileUtil.h	7;"	d
+FLAGS	Makefile	/^FLAGS= -g -c -m32$/;"	m
+LINKEDLIST	Makefile	/^LINKEDLIST = .\/linkedlist\/linkedList.o .\/linkedlist\/listUtils.o $/;"	m
+LINKEDLIST_H	linkedlist/linkedList.h	11;"	d
+LISTUTILS_H	linkedlist/listUtils.h	11;"	d
+LinkedList	linkedlist/linkedList.h	/^typedef struct linkedlist LinkedList;$/;"	t	typeref:struct:linkedlist
+MAIN	Makefile	/^MAIN = .\/cscd340Lab3.c$/;"	m
+MAX	linkedlist/listUtils.h	19;"	d
+MAX	utils/fileUtil.h	12;"	d
+MAX	utils/myUtils.h	13;"	d
+MOVIES	Makefile	/^MOVIES = .\/movies\/movie.o$/;"	m
+MOVIE_H_	movies/movie.h	2;"	d
+MYUTILS_H	utils/myUtils.h	7;"	d
+Movie	movies/movie.h	/^typedef struct movie Movie;$/;"	t	typeref:struct:movie
+Node	linkedlist/linkedList.h	/^typedef struct node Node;$/;"	t	typeref:struct:node
+REQUIREDINCLUDES_H	linkedlist/requiredIncludes.h	9;"	d
+UTILS	Makefile	/^UTILS= .\/utils\/myUtils.o .\/utils\/fileUtil.o$/;"	m
+WORDS	Makefile	/^WORDS = .\/words\/word.o$/;"	m
+WORD_H_	words/word.h	2;"	d
+Word	words/word.h	/^typedef struct word Word;$/;"	t	typeref:struct:word
+actor	movies/actor.h	/^struct actor$/;"	s
+actors	movies/movie.h	/^   Actor * actors;$/;"	m	struct:movie
+addFirst	linkedlist/linkedList.c	/^void addFirst(LinkedList *theList, Node *nn) {$/;"	f
+addLast	linkedlist/linkedList.c	/^void addLast(LinkedList* theList, Node *nn) {$/;"	f
+buildListTotal	linkedlist/listUtils.c	/^void buildListTotal(LinkedList * myList, int total, FILE * fin, $/;"	f
+buildTypeWord	words/word.c	/^void* buildTypeWord(FILE *fin) {$/;"	f
+cleanTypeWord	words/word.c	/^void cleanTypeWord(void *ptr) {$/;"	f
+countRecords	utils/fileUtil.c	/^int countRecords(FILE * fin, int linesPerRecord)$/;"	f
+data	linkedlist/linkedList.h	/^    void * data;$/;"	m	struct:node
+first	movies/actor.h	/^	char *first;$/;"	m	struct:actor
+head	linkedlist/linkedList.h	/^    Node * head;$/;"	m	struct:linkedlist
+last	movies/actor.h	/^	char *last;$/;"	m	struct:actor
+len	words/word.h	/^   int len;$/;"	m	struct:word
+linkedList	linkedlist/linkedList.c	/^LinkedList* linkedList() {$/;"	f
+linkedlist	linkedlist/linkedList.h	/^struct linkedlist$/;"	s
+ltrs	words/word.h	/^   char * ltrs;$/;"	m	struct:word
+main	cscd340Lab3.c	/^int main()$/;"	f
+menu	utils/myUtils.c	/^int menu()$/;"	f
+movie	movies/movie.h	/^struct movie$/;"	s
+next	linkedlist/linkedList.h	/^    struct node * next;$/;"	m	struct:node	typeref:struct:node::node
+node	linkedlist/linkedList.h	/^struct node$/;"	s
+openInputFileType_Prompt	utils/fileUtil.c	/^FILE * openInputFileType_Prompt(char * type)$/;"	f
+openInputFile_Prompt	utils/fileUtil.c	/^FILE * openInputFile_Prompt()$/;"	f
+prev	linkedlist/linkedList.h	/^    struct node * prev;$/;"	m	struct:node	typeref:struct:node::node
+printList	linkedlist/linkedList.c	/^void printList(const LinkedList * theList, void (*convertData)(void *)) {$/;"	f
+readTotal	utils/fileUtil.c	/^int readTotal(FILE * fin)$/;"	f
+size	linkedlist/linkedList.h	/^    int size;$/;"	m	struct:linkedlist
+strip	utils/myUtils.c	/^void strip(char *array)$/;"	f
+title	movies/movie.h	/^   char * title;$/;"	m	struct:movie
+totalActors	movies/movie.h	/^   int totalActors;$/;"	m	struct:movie
+word	words/word.h	/^struct word$/;"	s

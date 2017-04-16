@@ -1,0 +1,13 @@
+Enter your choice: 4
+all done
+in cleanup
+==5844== 
+==5844== HEAP SUMMARY:
+==5844==     in use at exit: 0 bytes in 0 blocks
+==5844==   total heap usage: 14 allocs, 14 frees, 6,853 bytes allocated
+==5844== 
+==5844== All heap blocks were freed -- no leaks are possible
+==5844== 
+==5844== For counts of detected and suppressed errors, rerun with: -v
+==5844== ERROR SUMMARY: 27 errors from 9 contexts (suppressed: 0 from 0)
+
