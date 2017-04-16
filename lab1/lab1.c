@@ -85,7 +85,7 @@ Address * fillArray(int * total, FILE * fin){
         fscanf(fin, "%d", &zip);
         // printf("%d\n", zip);
 
-        // eat the fucken '\r' '\n' that was killing me for hours
+        // eat the '\r' '\n' that was killing me for hours
         fgets(temp, MAX, fin);
 
         addresses[index].street = (char*) malloc(strlen(street)+1);
