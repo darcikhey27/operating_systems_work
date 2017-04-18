@@ -28,7 +28,7 @@ int main()
 
 	else
 	{
-		argc = makeargs(s, &argv);
+		argc = makeArgs(s, &argv);
 	  	if(argc != -1)
 	  		forkIt(argv);
 	  
