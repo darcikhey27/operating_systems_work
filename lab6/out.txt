@@ -1,10 +1,8 @@
-darci@ubuntu:~/git/operating_systems_work/lab6/Lab6$ ls
-cscd340Lab6a.c  cscd340_s17_lab6.pdf  pipes    tags      utils
-cscd340Lab6.c   Makefile              process  tokenize
 darci@ubuntu:~/git/operating_systems_work/lab6/Lab6$ gcc cscd340Lab6a.c 
-darci@ubuntu:~/git/operating_systems_work/lab6/Lab6$ ./a.out 
-92
 darci@ubuntu:~/git/operating_systems_work/lab6/Lab6$ ls -l | wc -w
 92
 darci@ubuntu:~/git/operating_systems_work/lab6/Lab6$
+darci@ubuntu:~/git/operating_systems_work/lab6/Lab6$ ./a.out 
+92
+
 

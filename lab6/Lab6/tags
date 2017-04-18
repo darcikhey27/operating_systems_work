@@ -11,7 +11,14 @@ MAX	utils/myUtils.h	17;"	d
 MYUTILS_H	utils/myUtils.h	11;"	d
 PIPES_H	pipes/pipes.h	2;"	d
 PROCESS_H	process/process.h	2;"	d
+clean	tokenize/makeArgs.c	/^void clean(int argc, char **argv) {$/;"	f
+containsPipe	pipes/pipes.c	/^int containsPipe(char *s) {$/;"	f
+forkIt	process/process.c	/^void forkIt(char ** argv) {$/;"	f
 main	cscd340Lab6.c	/^int main()$/;"	f
 main	cscd340Lab6a.c	/^int main()$/;"	f
+makeArgs	tokenize/makeArgs.c	/^int makeArgs(char *s, char *** argv) {$/;"	f
 menu	utils/myUtils.c	/^int menu()$/;"	f
+parsePostPipe	pipes/pipes.c	/^char** parsePostPipe(char *s, int *postCount) {$/;"	f
+parsePrePipe	pipes/pipes.c	/^char** parsePrePipe(char *s, int* preCount) {$/;"	f
+printargs	tokenize/makeArgs.c	/^void printargs(int argc, char **argv)$/;"	f
 strip	utils/myUtils.c	/^void strip(char *array)$/;"	f
