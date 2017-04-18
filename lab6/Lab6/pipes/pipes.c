@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "../utils/myUtils.h"
 
 
 #include "pipes.h"
@@ -17,10 +18,27 @@ int containsPipe(char *s) {
             pipeCount++;
         }
     }
+    printf("pipe count is %d\n", pipeCount);
     return pipeCount;
 }
 
 char** parsePrePipe(char *s, int* preCount) {
+   
+    // read the string until we see a pipe
+    int stringlen = strlen(s);
+    int i;
+    int foundPipeAt = 0;
+    char preString[MAX];
+    
+    for(i = 0; i < stringlen; i++) {
+        if(s[i] != '|') {
+            preString[i] == s[i];
+        } 
+    }
+
+
+
+    //makeArgs(preString)
     
     return NULL;
 }
