@@ -9,7 +9,7 @@
 #include "pipes.h"
 /* containsPipe – In this function print out the count of the number of pipes in the string */
 int containsPipe(char *s) {
-    
+
     int stringlen = strlen(s);
     int i;
     int pipeCount = 0;
@@ -24,7 +24,7 @@ int containsPipe(char *s) {
 }
 
 char** parsePrePipe(char *s, int* preCount) {
-  
+
     printf("in parsePrePipe()\n");
     // read the string until we see a pipe
     int stringlen = strlen(s);
@@ -35,20 +35,20 @@ char** parsePrePipe(char *s, int* preCount) {
     token = strtok(line, "|");
     strip(token);
     //printf("token is %s\n", token);
-    
+
     char **argv = NULL;
     int argc = 0;
-    
+
     argc = makeArgs(token, &argv);
 
     printargs(argc, argv);
     *preCount = argc;
-    
+
     return argv;
 }
 
 char** parsePostPipe(char *s, int *postCount) {
-   
+
     printf("In parsePostPipe\n");
 
     char *token;
@@ -61,45 +61,45 @@ char** parsePostPipe(char *s, int *postCount) {
 
     char **argv = NULL;
     int argc = 0;
-    
+
     argc = makeArgs(token, &argv);
 
     printargs(argc, argv);
-    
+
     return argv;
 }
 /*
-void pipeIt(char ** prePipe, char ** postPipe) {
+   void pipeIt(char ** prePipe, char ** postPipe) {
 
-    // take the two commands and work it
-    printf("In pipeIt()\n");
-	pid_t pid;
-	int fd[2], res, status;
-	res = pipe(fd);
+// take the two commands and work it
+printf("In pipeIt()\n");
+pid_t pid;
+int fd[2], res, status;
+res = pipe(fd);
 
-	if(res < 0) {
-		printf("Pipe Failure\n");
-		exit(-1);
-	}
-	pid = fork();
+if(res < 0) {
+printf("Pipe Failure\n");
+exit(-1);
+}
+pid = fork();
 
-	if(pid != 0) {
-        close(fd[1]);
-        close(0);
-        dup(fd[0]);
-        close(fd[0]);
+if(pid != 0) {
+close(fd[1]);
+close(0);
+dup(fd[0]);
+close(fd[0]);
 
-        //execlp("wc", "wc", "-w", NULL);
-        execvp(postPipe[0], postPipe);
-	} 
-    else {
-		close(fd[0]);
-		close(1);
-		dup(fd[1]);
-		close(fd[1]);
-		//execlp("ls", "ls", "-l", NULL);
-        execvp(prePipe[0], prePipe);
-	}
+//execlp("wc", "wc", "-w", NULL);
+execvp(postPipe[0], postPipe);
+} 
+else {
+close(fd[0]);
+close(1);
+dup(fd[1]);
+close(fd[1]);
+//execlp("ls", "ls", "-l", NULL);
+execvp(prePipe[0], prePipe);
+}
 }*/
 
 
@@ -107,31 +107,41 @@ void pipeIt(char ** prePipe, char ** postPipe) {
 
     // take the two commands and work it
     printf("In pipeIt()\n");
-	pid_t pid;
-	int fd[2], res, status;
-	res = pipe(fd);
+    pid_t pid;
+    int fd[2], res, status;
+    res = pipe(fd);
 
-	if(res < 0) {
-		printf("Pipe Failure\n");
-		exit(-1);
-	}
-	pid = fork();
+    if(res < 0) {
+        printf("Pipe Failure\n");
+        exit(-1);
+    }
+    pid = fork();
+    status = 0;
 
-	if(pid != 0) {
-        close(fd[1]);
-        close(0);
-        dup(fd[0]);
-        close(fd[0]);
-
-        //execlp("wc", "wc", "-w", NULL);
-        execvp(postPipe[0], postPipe);
-	} 
+    if(pid != 0) {
+        waitpid(pid, &status, 0);
+    } 
     else {
-		close(fd[0]);
-		close(1);
-		dup(fd[1]);
-		close(fd[1]);
-		//execlp("ls", "ls", "-l", NULL);
-        execvp(prePipe[0], prePipe);
-	}
+        //execlp("ls", "ls", "-l", NULL);
+        pipe(fd);
+        pid = fork();
+        if(pid != 0) {
+            close(fd[1]);
+            close(0);
+            dup(fd[0]);
+            close(fd[0]);
+
+            //execlp("wc", "wc", "-w", NULL);
+            execvp(postPipe[0], postPipe);
+            exit(-1);
+        } 
+        else {
+            close(fd[0]);
+            close(1);
+            dup(fd[1]);
+            close(fd[1]);
+            execvp(prePipe[0], prePipe);
+            exit(-1);
+        }
+    }
 }
