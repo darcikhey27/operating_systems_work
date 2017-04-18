@@ -25,53 +25,34 @@ int containsPipe(char *s) {
 
 char** parsePrePipe(char *s, int* preCount) {
   
-    printf("s is %s\n", s);
+    //printf("s is %s\n", s);
     // read the string until we see a pipe
     int stringlen = strlen(s);
-    int i;
-    int foundPipeAt = 0;
-    char preString[MAX];
-    
-    for(i = 0; i < stringlen; i++) {
-        if(s[i] != '|') {
-            //preString[i] == s[i];
-            printf("s[%d] %c\n", i, s[i]);
-        } 
-    }
-    //strip(preString);
-    //printf("prestring is %s\n", preString);
+
+    char *token;
+    char line[MAX];
+    strcpy(line, s);
+    token = strtok(s, "|");
+    printf("token is %s\n", token);
     
     char **argv = NULL;
     int argc = 0;
     
-    //argc = makeArgs(preString, &argv);
+    argc = makeArgs(token, &argv);
 
-    //printargs(argc, argv);
+    printargs(argc, argv);
     
     return argv;
 }
 
 char** parsePostPipe(char *s, int *postCount) {
-    
-    int stringlen = strlen(s);
-    int i;
-    int foundPipeAt = 0;
-    char right[MAX];
-
-    for(i = 0; i < stringlen; i++) {
-        if(s[i] != '|') {
-            foundPipeAt++;
-        }
-    }
-    for(i = foundPipeAt; i < stringlen; i++) {
-        right[i] = s[i];
-    }
-    strip(right);
-    puts(right);
-
+    puts("in postcount"); 
+    printf("s is %s\n", s);
     char **argv = NULL;
     int argc = 0;
-    
+    char right[MAX];
+    strcpy(right, "darci");
+
     argc = makeArgs(right, &argv);
     printargs(argc, argv);
     *postCount = argc;
