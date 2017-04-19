@@ -4,10 +4,9 @@
 #include <stdlib.h>
 #include "../utils/myUtils.h"
 #include "../tokenize/makeArgs.h"
-
-
 #include "pipes.h"
-/* containsPipe – In this function print out the count of the number of pipes in the string */
+
+/* checks and counts how many pipes are in the s string */
 int containsPipe(char *s) {
 
     int stringlen = strlen(s);
@@ -23,6 +22,7 @@ int containsPipe(char *s) {
     return pipeCount;
 }
 
+/* saves the string until we see a pipe */
 char** parsePrePipe(char *s, int* preCount) {
 
     printf("in parsePrePipe()\n");
@@ -47,6 +47,7 @@ char** parsePrePipe(char *s, int* preCount) {
     return argv;
 }
 
+/* parses a string until after the pipe */
 char** parsePostPipe(char *s, int *postCount) {
 
     printf("In parsePostPipe\n");
@@ -104,6 +105,7 @@ execvp(prePipe[0], prePipe);
 }*/
 
 
+/* exectutes both of the strings, left and right */
 void pipeIt(char ** prePipe, char ** postPipe) {
 
     // take the two commands and work it
