@@ -65,6 +65,7 @@ char** parsePostPipe(char *s, int *postCount) {
     argc = makeArgs(token, &argv);
 
     printargs(argc, argv);
+    *postCount = argc;
 
     return argv;
 }
