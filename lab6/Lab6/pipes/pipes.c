@@ -8,7 +8,6 @@
 
 /* checks and counts how many pipes are in the s string */
 int containsPipe(char *s) {
-
     int stringlen = strlen(s);
     int i;
     int pipeCount = 0;
@@ -18,7 +17,7 @@ int containsPipe(char *s) {
             pipeCount++;
         }
     }
-    printf("Pipe count is %d\n", pipeCount);
+    //printf("Pipe count is %d\n", pipeCount);
     return pipeCount;
 }
 
@@ -70,40 +69,6 @@ char** parsePostPipe(char *s, int *postCount) {
 
     return argv;
 }
-/*
-   void pipeIt(char ** prePipe, char ** postPipe) {
-
-// take the two commands and work it
-printf("In pipeIt()\n");
-pid_t pid;
-int fd[2], res, status;
-res = pipe(fd);
-
-if(res < 0) {
-printf("Pipe Failure\n");
-exit(-1);
-}
-pid = fork();
-
-if(pid != 0) {
-close(fd[1]);
-close(0);
-dup(fd[0]);
-close(fd[0]);
-
-//execlp("wc", "wc", "-w", NULL);
-execvp(postPipe[0], postPipe);
-} 
-else {
-close(fd[0]);
-close(1);
-dup(fd[1]);
-close(fd[1]);
-//execlp("ls", "ls", "-l", NULL);
-execvp(prePipe[0], prePipe);
-}
-}*/
-
 
 /* exectutes both of the strings, left and right */
 void pipeIt(char ** prePipe, char ** postPipe) {
