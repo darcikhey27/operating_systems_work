@@ -24,7 +24,7 @@ int containsPipe(char *s) {
 /* saves the string until we see a pipe */
 char** parsePrePipe(char *s, int* preCount) {
 
-    printf("in parsePrePipe()\n");
+    //printf("in parsePrePipe()\n");
     // read the string until we see a pipe
     int stringlen = strlen(s);
 
@@ -40,7 +40,7 @@ char** parsePrePipe(char *s, int* preCount) {
 
     argc = makeArgs(token, &argv);
 
-    printargs(argc, argv);
+    //printargs(argc, argv);
     *preCount = argc;
 
     return argv;
@@ -48,8 +48,7 @@ char** parsePrePipe(char *s, int* preCount) {
 
 /* parses a string until after the pipe */
 char** parsePostPipe(char *s, int *postCount) {
-
-    printf("In parsePostPipe\n");
+    //printf("In parsePostPipe\n");
 
     char *token;
     char line[MAX];
@@ -64,7 +63,7 @@ char** parsePostPipe(char *s, int *postCount) {
 
     argc = makeArgs(token, &argv);
 
-    printargs(argc, argv);
+    //printargs(argc, argv);
     *postCount = argc;
 
     return argv;
@@ -74,7 +73,7 @@ char** parsePostPipe(char *s, int *postCount) {
 void pipeIt(char ** prePipe, char ** postPipe) {
 
     // take the two commands and work it
-    printf("In pipeIt()\n");
+    //printf("In pipeIt()\n");
     pid_t pid;
     int fd[2], res, status;
     res = pipe(fd);
