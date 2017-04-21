@@ -7,6 +7,9 @@
 
 Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) ) {
 
+    if(buildData(fin) == NULL) {
+        return NULL;
+    }
     Node *newNode = (Node*) malloc(sizeof(Node));
     newNode->data = buildData(fin);
     // added this

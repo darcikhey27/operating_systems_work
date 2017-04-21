@@ -158,7 +158,8 @@ void checkForAlias(FILE *fin, LinkedList *theList) {
         // the string is not an alias
         return;
     }
-
+    // addLast here pass the fin so I can build 
+    // the node somewhere else
 
     char stringCopy[MAX];
     strcpy(stringCopy, string);
@@ -176,7 +177,7 @@ void checkForAlias(FILE *fin, LinkedList *theList) {
 
     // add the alias to the alias file? 
     // addFirst(theList, )
-    //addLast(theList, buildNode(stdin, buildTypeAlias));
+    addLast(theList, buildNode(fin, buildTypeAlias));
 
 
 }

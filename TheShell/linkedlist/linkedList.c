@@ -23,6 +23,7 @@ void addLast(LinkedList* theList, Node *nn) {
         exit(-99);
     }
     if(nn == NULL) {
+        // I dont want to exit here because if nn is not an alias object I can't exit
         puts("the nn is null");
         exit(-99);
     }
