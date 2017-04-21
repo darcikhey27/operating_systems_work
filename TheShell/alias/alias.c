@@ -5,79 +5,73 @@
 //#include "actor.h"
 
 void cleanTypeAlias(void * ptr) {
-//     if(ptr == NULL) {
-//         puts("ptr is null");
-//         exit(-99);
-//     }
-//     int i;
-//     Alias *alias = (Alias*) ptr;
-//     for(i = 0; i < alias->totalActors; i++) {
-//         free(alias->actors[i].first);
-//         free(alias->actors[i].last);
-//         alias->actors[i].first = NULL;
-//         alias->actors[i].last = NULL;
-//     }
-//     free(alias->actors);
-//     alias->actors = NULL;
-//     free(alias->title);
-//     alias->title = NULL;
-//     free(alias);
-//     alias = NULL;
+    //     if(ptr == NULL) {
+    //         puts("ptr is null");
+    //         exit(-99);
+    //     }
+    //     int i;
+    //     Alias *alias = (Alias*) ptr;
+    //     for(i = 0; i < alias->totalActors; i++) {
+    //         free(alias->actors[i].first);
+    //         free(alias->actors[i].last);
+    //         alias->actors[i].first = NULL;
+    //         alias->actors[i].last = NULL;
+    //     }
+    //     free(alias->actors);
+    //     alias->actors = NULL;
+    //     free(alias->title);
+    //     alias->title = NULL;
+    //     free(alias);
+    //     alias = NULL;
 }
 
- void* buildTypeAlias(FILE *fin) {
-     if(fin == NULL) {
-         puts("fin is null");
-         exit(-99);
-     }
-     /*
+void* buildTypeAlias(FILE *fin) {
+    if(fin == NULL) {
+        puts("fin is null");
+        exit(-99);
+    }
 
-     int numOfAliass = 0;
-     char title[MAX];
-     int totalActors = 0;
-     char temp[MAX];
-     char tempLine[5];
+    char string[MAX];
+    fgets(string, MAX, fin);
+    strip(string);
+    char copy[MAX];
+    strcpy(copy, string);
+    char *isAlias;
+    isAlias = strtok(copy, " ");
+    strip(isAlias);
 
-     // The alias contains an array of actors with first and last emembers
+    if(strcmp(isAlias, "alias") != 0) {
+        // the string is not an alias
+        return NULL;
+    }
+    // addLast here pass the fin so I can build 
+    // the node somewhere else
 
-     fscanf(fin, "%d", &numOfAliass);
-    // printf("noOfaliass %d\n", numOfAliass);
+    char stringCopy[MAX];
+    strcpy(stringCopy, string);
+    char *left;
+    char *right;
 
-     // title
-     fgets(title, MAX, fin);
-     strip(title);
-     //printf("title: %s\n", title);
+    left = strtok(stringCopy, "=");
+    right = strtok(NULL, "=");
+    strtok(left, " ");
 
-     // total actors
-     fscanf(fin, "%d" , &totalActors);
-     //printf("total actors %d\n", totalActors);
+    left = strtok(NULL, " ");
+    right = strtok(right, "'");
 
-     Actor *actors = (Actor*) malloc(sizeof(Actor) * totalActors);
-     int i; 
-     for(i = 0; i < totalActors; i++) {
-         char first[MAX];
-         char last[MAX];
-         fscanf(fin, "%s %s", first, last);
-         strip(first);
-         strip(last);
+    Alias *alias = (Alias*)malloc(sizeof(Alias));
+    alias->alias = (char*) malloc(sizeof(left)+1);
+    int argc = makeArgs(right, &alias->tokenized_command);
 
-         actors[i].first = (char*) malloc(strlen(first)+1);
-         strcpy(actors[i].first, first);
-         actors[i].last = (char*) malloc(strlen(last)+1);
-         strcpy(actors[i].last, last);
-     }
-     Alias *alias = (Alias*) malloc(sizeof(Alias));
-     alias->actors = actors;
-     alias->totalActors = totalActors;
-     alias->title = (char*) malloc(strlen(title)+ 1);
-     strcpy(alias->title, title);
-     */
-     return NULL;
+    printf("left: %s right: %s\n", alias->alias, 
+            alias->tokenized_command[0]);
+    return alias;
 }
 
 void printTypeAlias(void* passedIn) {
-    // Alias alias = *((Alias*) passedIn);
-    // printf("Alias title: %s\n", alias.title);
+    Alias alias = *((Alias*) passedIn);
+    printf("command: %s\n", alias.alias);
+    
 
     // int actors = alias.totalActors;
     // for(int i = 0; i < actors; i++) {
@@ -96,7 +90,7 @@ void * buildTypeAlias_Prompt(FILE * fin) {
     // printf("Enter the title for the alias: ");
     // fgets(title, MAX, fin);
     // strip(title);
-    
+
     // printf("Enter total actors: ");
     // fscanf(fin, "%d", &totalActors);
 
@@ -125,14 +119,14 @@ void * buildTypeAlias_Prompt(FILE * fin) {
 }
 
 int compareAlias(const void * p1, const void * p2) {
-    
+
     // if(p1 == NULL || p2 == NULL) {
     //     puts("p1 or p2 is NULL");
     //     exit(-99);
     // }
     // Alias left = *((Alias*) p1);
     // Alias right = *((Alias*) p2);
-    
+
     // if(strcmp(left.title, right.title) > 0) {
     //     return 1;
     // }
