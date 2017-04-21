@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 #include "alias.h"
 //#include "actor.h"
 
@@ -94,7 +94,12 @@ void *buildTypeAlias_string(char* string) {
 
     printf("left: %s right: %s\n", left, right);
     // allocate memory for the alias object here 
+    Alias *aliasObject = (Alias*) malloc(sizeof(Alias));
+    aliasObject->alias = (char*) malloc(sizeof(left) + 1);
     
+    strcpy(aliasObject->alias, left);
+    aliasObject->argc = makeArgs(right, &(aliasObject->tokenized_command ));
+
     return NULL; // create alias object and return it
 }
 void * buildTypeAlias_Prompt(FILE * fin) {

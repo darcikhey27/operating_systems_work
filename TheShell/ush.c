@@ -155,7 +155,6 @@ void checkForAlias(char *line, LinkedList *theList) {
 
     if(strcmp(isAlias, "alias") != 0) {
         // the string is not an alias
-
         puts("is not alias");
         return;
     }

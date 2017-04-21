@@ -20,6 +20,7 @@ struct alias
 {
    char *alias;
    char **tokenized_command;
+   int argc;
 };
 
 typedef struct alias Alias;
