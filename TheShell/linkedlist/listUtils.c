@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "listUtils.h"
-#include "../words/word.h"
+//#include "../words/word.h"
 
 Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) ) {
 

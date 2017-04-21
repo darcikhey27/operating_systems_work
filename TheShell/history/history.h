@@ -12,6 +12,11 @@
  *
  * @note I prefer named structures and then the typedef after the structure
  */
+
+
+int HISTCOUNT;
+int HISTFILECOUNT;
+
 struct command
 {
    char * command;

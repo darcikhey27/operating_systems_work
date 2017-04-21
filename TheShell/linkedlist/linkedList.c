@@ -3,7 +3,7 @@
 #include<string.h>
 
 #include "linkedList.h"
-#include "../words/word.h"
+//#include "../words/word.h"
 
 
 LinkedList* linkedList() {
