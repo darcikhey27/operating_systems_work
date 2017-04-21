@@ -6,10 +6,11 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ALIAS_H_	alias/alias.h	2;"	d
 Alias	alias/alias.h	/^typedef struct alias Alias;$/;"	t	typeref:struct:alias
-Command	history/history.h	/^typedef struct command Command;$/;"	t	typeref:struct:command
 HISTCOUNT	history/history.h	/^int HISTCOUNT;$/;"	v
+HISTCOUNTER	ush.c	/^int HISTCOUNTER = 0;$/;"	v
 HISTFILECOUNT	history/history.h	/^int HISTFILECOUNT;$/;"	v
 HISTORY_H_	history/history.h	2;"	d
+History	history/history.h	/^typedef struct history History;$/;"	t	typeref:struct:history
 LINKEDLIST_H	linkedlist/linkedList.h	11;"	d
 LISTUTILS_H	linkedlist/listUtils.h	11;"	d
 LinkedList	linkedlist/linkedList.h	/^typedef struct linkedlist LinkedList;$/;"	t	typeref:struct:linkedlist
@@ -23,32 +24,35 @@ PIPES_H	pipes/pipes.h	2;"	d
 PROCESS_H	process/process.h	2;"	d
 REQUIREDINCLUDES_H	linkedlist/requiredIncludes.h	9;"	d
 addFirst	linkedlist/linkedList.c	/^void addFirst(LinkedList *theList, Node *nn) {$/;"	f
+addHistItems	ush.c	/^void addHistItems(FILE *fin, LinkedList *histList) {$/;"	f
 addLast	linkedlist/linkedList.c	/^void addLast(LinkedList* theList, Node *nn) {$/;"	f
 alias	alias/alias.h	/^   char *alias;$/;"	m	struct:alias
 alias	alias/alias.h	/^struct alias$/;"	s
+argc	alias/alias.h	/^   int argc;$/;"	m	struct:alias
+argc	history/history.h	/^   int argc;$/;"	m	struct:history
 buildListTotal	linkedlist/listUtils.c	/^void buildListTotal(LinkedList * myList, int total, FILE * fin, $/;"	f
 buildNode	linkedlist/listUtils.c	/^Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) ) {$/;"	f
 buildNode_Type	linkedlist/listUtils.c	/^Node * buildNode_Type(void * passedIn) {$/;"	f
-buildNode_Type_string	linkedlist/listUtils.c	/^Node * buildNode_Type_string(char *passedIn) {$/;"	f
-buildTypeAlias	alias/alias.c	/^void *buildTypeAlias(char* string) {$/;"	f
+buildNode_Type_string	linkedlist/listUtils.c	/^Node * buildNode_Type_string(char *passedIn, void *(*buildData)(char * string)) {$/;"	f
 buildTypeAlias	alias/alias.c	/^void* buildTypeAlias(FILE *fin) {$/;"	f
 buildTypeAlias_Prompt	alias/alias.c	/^void * buildTypeAlias_Prompt(FILE * fin) {$/;"	f
+buildTypeAlias_string	alias/alias.c	/^void *buildTypeAlias_string(char* string) {$/;"	f
 buildTypeCommand	history/history.c	/^void* buildTypeCommand(FILE *fin) {$/;"	f
 buildTypeCommand_Prompt	history/history.c	/^void * buildTypeCommand_Prompt(FILE * fin) {$/;"	f
+buildTypeHistory_string	history/history.c	/^void * buildTypeHistory_string(char *string) {$/;"	f
 checkForAlias	ush.c	/^void checkForAlias(char *line, LinkedList *theList) {$/;"	f
 clean	tokenize/makeArgs.c	/^void clean(int argc, char **argv) {$/;"	f
 cleanTypeAlias	alias/alias.c	/^void cleanTypeAlias(void * ptr) {$/;"	f
 cleanTypeCommand	history/history.c	/^void cleanTypeCommand(void * ptr) {$/;"	f
 clearList	linkedlist/linkedList.c	/^void clearList(LinkedList * theList, void (*removeData)(void *)) {$/;"	f
-command	history/history.h	/^   char * command;$/;"	m	struct:command
-command	history/history.h	/^struct command$/;"	s
+command	history/history.h	/^   char * command;$/;"	m	struct:history
 compareAlias	alias/alias.c	/^int compareAlias(const void * p1, const void * p2) {$/;"	f
 compareCommand	history/history.c	/^int compareCommand(const void * p1, const void * p2) {$/;"	f
 containsPipe	pipes/pipes.c	/^int containsPipe(char *s) {$/;"	f
 data	linkedlist/linkedList.h	/^    void * data;$/;"	m	struct:node
 forkIt	process/process.c	/^void forkIt(char ** argv) {$/;"	f
 head	linkedlist/linkedList.h	/^    Node * head;$/;"	m	struct:linkedlist
-histCounter	ush.c	/^int histCounter = 0;$/;"	v
+history	history/history.h	/^struct history$/;"	s
 linkedList	linkedlist/linkedList.c	/^LinkedList* linkedList() {$/;"	f
 linkedlist	linkedlist/linkedList.h	/^struct linkedlist$/;"	s
 main	ush.c	/^int main()$/;"	f
@@ -56,7 +60,7 @@ makeArgs	tokenize/makeArgs.c	/^int makeArgs(char *s, char *** argv) {$/;"	f
 menu	utils/myUtils.c	/^int menu()$/;"	f
 next	linkedlist/linkedList.h	/^    struct node * next;$/;"	m	struct:node	typeref:struct:node::node
 node	linkedlist/linkedList.h	/^struct node$/;"	s
-openUshrcFile	ush.c	/^FILE* openUshrcFile(char *filename) {$/;"	f
+openFile	ush.c	/^FILE* openFile(char *filename) {$/;"	f
 parsePostPipe	pipes/pipes.c	/^char** parsePostPipe(char *s, int *postCount) {$/;"	f
 parsePrePipe	pipes/pipes.c	/^char** parsePrePipe(char *s, int* preCount) {$/;"	f
 pipeIt	pipes/pipes.c	/^void pipeIt(char ** prePipe, char ** postPipe) {$/;"	f
@@ -75,4 +79,4 @@ size	linkedlist/linkedList.h	/^    int size;$/;"	m	struct:linkedlist
 sort	linkedlist/listUtils.c	/^void sort(LinkedList * theList, int (*compare)(const void *, const void *)) {$/;"	f
 strip	utils/myUtils.c	/^void strip(char *array)$/;"	f
 tokenized_command	alias/alias.h	/^   char **tokenized_command;$/;"	m	struct:alias
-tokenized_command	history/history.h	/^   char ** tokenized_command;$/;"	m	struct:command
+tokenized_command	history/history.h	/^   char ** tokenized_command;$/;"	m	struct:history

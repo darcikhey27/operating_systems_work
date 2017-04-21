@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../utils/myUtils.h"
+#include "../tokenize/makeArgs.h"
 /**
  * @brief The word data structure.
  *
@@ -17,13 +18,14 @@
 int HISTCOUNT;
 int HISTFILECOUNT;
 
-struct command
+struct history
 {
    char * command;
    char ** tokenized_command;
+   int argc;
 };
 
-typedef struct command Command;
+typedef struct history History;
 
 
 /**
@@ -66,9 +68,9 @@ void * buildTypeCommand(FILE * fin);
  *
  * @warning - The passed in void * passedIn is checked - exit(-99) if NULL
  */
-void printTypeCommand(void * passedIn);
+void printTypeHistory(void * passedIn);
 
-
+void * buildTypeHistory_string(char *string);
 /**
  * @brief Builds and returns a single word.
  *

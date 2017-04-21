@@ -5,7 +5,7 @@
 #include "../utils/myUtils.h"
 
 void cleanTypeCommand(void * ptr) {
-   
+
     // if(ptr == NULL) {
     //     puts("ptr is null");
     //     exit(-99);
@@ -40,12 +40,29 @@ void* buildTypeCommand(FILE *fin) {
     // // get rid of carriage return
     // //fgets(temp, 10, fin);
     // return commnad;
-    
+
+}
+void * buildTypeHistory_string(char *string) {
+    char stringCopy[MAX];
+    strcpy(stringCopy, string);
+    strip(stringCopy);
+
+    History *historyObject = (History*) malloc(sizeof(History));
+
+    historyObject->command = (char*) malloc(sizeof(stringCopy) + 1);
+    strcpy(historyObject->command, stringCopy);
+
+    historyObject->argc = makeArgs(stringCopy, &(historyObject->tokenized_command));
+
+
+    return historyObject; // return a history object 
 }
 
-void printTypeCommand(void* passedIn) {
-    // Command commnad =  *((Command*) passedIn);
-    // printf("commnad: %s len: %i\n", commnad.ltrs, commnad.len);
+void printTypeHistory(void* passedIn) {
+    History history = *((History*) passedIn);
+    printf("command: %s\n", history.command);
+
+    printargs(history.argc, history.tokenized_command); 
 }
 
 void * buildTypeCommand_Prompt(FILE * fin) {
@@ -55,7 +72,7 @@ void * buildTypeCommand_Prompt(FILE * fin) {
     // printf("Enter commnad: ");
     // fgets(temp, MAX, fin);
     // strip(temp);
-    
+
     // len = strlen(temp);
     // Command *commnad = (Command*) malloc(sizeof(Command));
     // commnad->ltrs = (char*) malloc(len+1);

@@ -31,46 +31,14 @@ void* buildTypeAlias(FILE *fin) {
         exit(-99);
     }
 
-    char string[MAX];
-    fgets(string, MAX, fin);
-    strip(string);
-    char copy[MAX];
-    strcpy(copy, string);
-    char *isAlias;
-    isAlias = strtok(copy, " ");
-    strip(isAlias);
-
-    if(strcmp(isAlias, "alias") != 0) {
-        // the string is not an alias
-        return NULL;
-    }
-    // addLast here pass the fin so I can build 
-    // the node somewhere else
-
-    char stringCopy[MAX];
-    strcpy(stringCopy, string);
-    char *left;
-    char *right;
-
-    left = strtok(stringCopy, "=");
-    right = strtok(NULL, "=");
-    strtok(left, " ");
-
-    left = strtok(NULL, " ");
-    right = strtok(right, "'");
-
-    Alias *alias = (Alias*)malloc(sizeof(Alias));
-    alias->alias = (char*) malloc(sizeof(left)+1);
-    int argc = makeArgs(right, &alias->tokenized_command);
-
-    printf("left: %s right: %s\n", alias->alias, 
-            alias->tokenized_command[0]);
-    return alias;
+    return NULL;
 }
 
 void printTypeAlias(void* passedIn) {
     Alias alias = *((Alias*) passedIn);
     printf("command: %s\n", alias.alias);
+
+   printargs(alias.argc, alias.tokenized_command); 
     
 
     // int actors = alias.totalActors;
@@ -98,9 +66,9 @@ void *buildTypeAlias_string(char* string) {
     aliasObject->alias = (char*) malloc(sizeof(left) + 1);
     
     strcpy(aliasObject->alias, left);
-    aliasObject->argc = makeArgs(right, &(aliasObject->tokenized_command ));
+    aliasObject->argc = makeArgs(right, &(aliasObject->tokenized_command));
 
-    return NULL; // create alias object and return it
+    return aliasObject; // create alias object and return it
 }
 void * buildTypeAlias_Prompt(FILE * fin) {
     // char title[MAX];
