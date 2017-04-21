@@ -14,7 +14,7 @@ void setHistoryCounts(FILE *fin, LinkedList *theList);
 void setHistoryCountsDefaults();
 void processString(char *string);
 FILE* openUshrcFile(char *filename);
-void checkForAlias(FILE *fin, LinkedList *theList);
+void checkForAlias(char *string, LinkedList *theList);
 
 // 
 int main()
@@ -131,7 +131,8 @@ void setHistoryCounts(FILE *fin, LinkedList *theList) {
     
     while(recordsCount != 0) {
         // the file may contain aliases and path maybe
-        checkForAlias(fin, theList);
+        fgets(line, MAX, fin);
+        checkForAlias(line, theList);
         puts("in while");
         recordsCount--;
     }
@@ -143,23 +144,26 @@ void setHistoryCounts(FILE *fin, LinkedList *theList) {
        }
        rewind(fin); */
 }
-void checkForAlias(FILE *fin, LinkedList *theList) {
+void checkForAlias(char *line, LinkedList *theList) {
     puts("Checking for aliases");
-    char string[MAX];
-    fgets(string, MAX, fin);
-    strip(string);
     char copy[MAX];
-    strcpy(copy, string);
+    strcpy(copy, line);
+    
     char *isAlias;
     isAlias = strtok(copy, " ");
     strip(isAlias);
 
     if(strcmp(isAlias, "alias") != 0) {
         // the string is not an alias
+
+        puts("is not alias");
         return;
     }
+    puts("is alias");
     // addLast here pass the fin so I can build 
     // the node somewhere else
+    printf("the alias that will be passed in is %s\n", line);
+    //addLast(theList, buildNode_Type_string(line, buildTypeAlias_string));
     
     /*
     char stringCopy[MAX];
@@ -179,7 +183,7 @@ void checkForAlias(FILE *fin, LinkedList *theList) {
     // add the alias to the alias file? 
     // addFirst(theList, )
     */
-    addLast(theList, buildNode(fin, buildTypeAlias));
+    // TODO: pass the string instead of the fin pointer
     //printList(theList); need to pass convertData
 
 

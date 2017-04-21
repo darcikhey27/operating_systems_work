@@ -55,6 +55,7 @@ void cleanTypeAlias(void * ptr);
  */
 void * buildTypeAlias(FILE * fin);
 
+void *buildTypeAlias_string(char *string);
 
 /**
  * @brief Prints the specific alias.

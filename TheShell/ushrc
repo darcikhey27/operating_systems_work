@@ -2,3 +2,4 @@ HISTCOUNT=25
 HISTFILECOUNT=50
 alias ll='ls -al'
 alias lp='ls -al'
+not alias

@@ -38,6 +38,7 @@
  */
 Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) );
 
+Node * buildNode_Type_string(char *string, void *(*buildData)(char * string));
 
 /**
  
@@ -62,7 +63,6 @@ Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) );
  */
 Node * buildNode_Type(void * passedIn);
 
-
 /**
  * @brief Sorts the linked list.
  *
@@ -77,6 +77,7 @@ Node * buildNode_Type(void * passedIn);
  * @warning - The theList-> size is checked and if the list contains 0 or 1 element then the function
  * does not attempt to sort the list.
  */
+
 void sort(LinkedList * theList, int (*compare)(const void *, const void *));
 
 

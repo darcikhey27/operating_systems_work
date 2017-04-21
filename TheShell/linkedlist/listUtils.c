@@ -20,6 +20,17 @@ Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) ) {
     return newNode;
 }
 
+// this method will be used for creating the aliases
+Node * buildNode_Type_string(char *passedIn, void *(*buildData)(char * string)) {
+    // added this line today
+    Node *newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = buildData(passedIn);
+    newNode->next = NULL;
+    newNode->prev = NULL;
+
+    return newNode;
+}
+
 Node * buildNode_Type(void * passedIn) {
     // added this line today
     Node *newNode = (Node*)malloc(sizeof(Node));

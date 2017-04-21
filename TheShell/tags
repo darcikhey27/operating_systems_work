@@ -29,9 +29,13 @@ alias	alias/alias.h	/^struct alias$/;"	s
 buildListTotal	linkedlist/listUtils.c	/^void buildListTotal(LinkedList * myList, int total, FILE * fin, $/;"	f
 buildNode	linkedlist/listUtils.c	/^Node * buildNode(FILE * fin, void *(*buildData)(FILE * in) ) {$/;"	f
 buildNode_Type	linkedlist/listUtils.c	/^Node * buildNode_Type(void * passedIn) {$/;"	f
+buildNode_Type_string	linkedlist/listUtils.c	/^Node * buildNode_Type_string(char *passedIn) {$/;"	f
+buildTypeAlias	alias/alias.c	/^void *buildTypeAlias(char* string) {$/;"	f
+buildTypeAlias	alias/alias.c	/^void* buildTypeAlias(FILE *fin) {$/;"	f
 buildTypeAlias_Prompt	alias/alias.c	/^void * buildTypeAlias_Prompt(FILE * fin) {$/;"	f
 buildTypeCommand	history/history.c	/^void* buildTypeCommand(FILE *fin) {$/;"	f
 buildTypeCommand_Prompt	history/history.c	/^void * buildTypeCommand_Prompt(FILE * fin) {$/;"	f
+checkForAlias	ush.c	/^void checkForAlias(char *line, LinkedList *theList) {$/;"	f
 clean	tokenize/makeArgs.c	/^void clean(int argc, char **argv) {$/;"	f
 cleanTypeAlias	alias/alias.c	/^void cleanTypeAlias(void * ptr) {$/;"	f
 cleanTypeCommand	history/history.c	/^void cleanTypeCommand(void * ptr) {$/;"	f
@@ -65,7 +69,7 @@ processString	ush.c	/^void processString(char *string) {$/;"	f
 removeFirst	linkedlist/linkedList.c	/^void removeFirst(LinkedList * theList, void (*removeData)(void *)) {$/;"	f
 removeItem	linkedlist/linkedList.c	/^void removeItem(LinkedList * theList, Node * nn, void (*removeData)(void *), $/;"	f
 removeLast	linkedlist/linkedList.c	/^void removeLast(LinkedList * theList, void (*removeData)(void *)) {$/;"	f
-setHistoryCounts	ush.c	/^void setHistoryCounts(FILE *fin) {$/;"	f
+setHistoryCounts	ush.c	/^void setHistoryCounts(FILE *fin, LinkedList *theList) {$/;"	f
 setHistoryCountsDefaults	ush.c	/^void setHistoryCountsDefaults() {$/;"	f
 size	linkedlist/linkedList.h	/^    int size;$/;"	m	struct:linkedlist
 sort	linkedlist/listUtils.c	/^void sort(LinkedList * theList, int (*compare)(const void *, const void *)) {$/;"	f

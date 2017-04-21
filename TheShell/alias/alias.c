@@ -78,7 +78,25 @@ void printTypeAlias(void* passedIn) {
     //     printf("%s %s\n", alias.actors[i].first, alias.actors[i].last);
     // }
 }
+void *buildTypeAlias_string(char* string) {
+    char stringCopy[MAX];
+    strcpy(stringCopy, string);
+    
+    char *left;
+    char *right;
 
+    left = strtok(stringCopy, "=");
+    right = strtok(NULL, "=");
+    strtok(left, " ");
+
+    left = strtok(NULL, " ");
+    right = strtok(right, "'");
+
+    printf("left: %s right: %s\n", left, right);
+    // allocate memory for the alias object here 
+    
+    return NULL; // create alias object and return it
+}
 void * buildTypeAlias_Prompt(FILE * fin) {
     // char title[MAX];
     // int totalActors;
