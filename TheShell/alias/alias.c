@@ -23,55 +23,56 @@ void cleanTypeAlias(void * ptr) {
 //     alias->title = NULL;
 //     free(alias);
 //     alias = NULL;
-// }
+}
 
-// void* buildTypeAlias(FILE *fin) {
-//     if(fin == NULL) {
-//         puts("fin is null");
-//         exit(-99);
-//     }
-//     int numOfAliass = 0;
-//     char title[MAX];
-//     int totalActors = 0;
+ void* buildTypeAlias(FILE *fin) {
+     if(fin == NULL) {
+         puts("fin is null");
+         exit(-99);
+     }
+     /*
 
-//     char temp[MAX];
-//     char tempLine[5];
+     int numOfAliass = 0;
+     char title[MAX];
+     int totalActors = 0;
+     char temp[MAX];
+     char tempLine[5];
 
-//     // The alias contains an array of actors with first and last emembers
+     // The alias contains an array of actors with first and last emembers
 
-//     fscanf(fin, "%d", &numOfAliass);
-//    // printf("noOfaliass %d\n", numOfAliass);
+     fscanf(fin, "%d", &numOfAliass);
+    // printf("noOfaliass %d\n", numOfAliass);
 
-//     // title
-//     fgets(title, MAX, fin);
-//     strip(title);
-//     //printf("title: %s\n", title);
+     // title
+     fgets(title, MAX, fin);
+     strip(title);
+     //printf("title: %s\n", title);
 
-//     // total actors
-//     fscanf(fin, "%d" , &totalActors);
-//     //printf("total actors %d\n", totalActors);
+     // total actors
+     fscanf(fin, "%d" , &totalActors);
+     //printf("total actors %d\n", totalActors);
 
-//     Actor *actors = (Actor*) malloc(sizeof(Actor) * totalActors);
-//     int i; 
-//     for(i = 0; i < totalActors; i++) {
-//         char first[MAX];
-//         char last[MAX];
-//         fscanf(fin, "%s %s", first, last);
-//         strip(first);
-//         strip(last);
+     Actor *actors = (Actor*) malloc(sizeof(Actor) * totalActors);
+     int i; 
+     for(i = 0; i < totalActors; i++) {
+         char first[MAX];
+         char last[MAX];
+         fscanf(fin, "%s %s", first, last);
+         strip(first);
+         strip(last);
 
-//         actors[i].first = (char*) malloc(strlen(first)+1);
-//         strcpy(actors[i].first, first);
-//         actors[i].last = (char*) malloc(strlen(last)+1);
-//         strcpy(actors[i].last, last);
-//     }
-//     Alias *alias = (Alias*) malloc(sizeof(Alias));
-//     alias->actors = actors;
-//     alias->totalActors = totalActors;
-//     alias->title = (char*) malloc(strlen(title)+ 1);
-//     strcpy(alias->title, title);
-
-//     return alias;
+         actors[i].first = (char*) malloc(strlen(first)+1);
+         strcpy(actors[i].first, first);
+         actors[i].last = (char*) malloc(strlen(last)+1);
+         strcpy(actors[i].last, last);
+     }
+     Alias *alias = (Alias*) malloc(sizeof(Alias));
+     alias->actors = actors;
+     alias->totalActors = totalActors;
+     alias->title = (char*) malloc(strlen(title)+ 1);
+     strcpy(alias->title, title);
+     */
+     return NULL;
 }
 
 void printTypeAlias(void* passedIn) {
@@ -120,7 +121,7 @@ void * buildTypeAlias_Prompt(FILE * fin) {
     // alias->title = (char*) malloc(strlen(title)+ 1);
     // strcpy(alias->title, title);
 
-    // return alias;
+    return NULL;
 }
 
 int compareAlias(const void * p1, const void * p2) {
@@ -141,6 +142,6 @@ int compareAlias(const void * p1, const void * p2) {
     // else {
     //     return left.totalActors - right.totalActors;
     // }
-
+    return 0;
 }
 

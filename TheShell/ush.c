@@ -10,12 +10,11 @@
 
 // linkedlist history counter
 int histCounter = 0;
-void setHistoryCounts(FILE *fin);
-void setHistoryCountsDefaults();
+void setHistoryCounts(FILE *fin, LinkedList *theList);
 void setHistoryCountsDefaults();
 void processString(char *string);
 FILE* openUshrcFile(char *filename);
-void checkForAlias(char *string);
+void checkForAlias(FILE *fin, LinkedList *theList);
 
 // 
 int main()
@@ -25,9 +24,11 @@ int main()
 
     fin = openUshrcFile("ushrc");
 
+    LinkedList * aliasList = linkedList();
+
     if(fin != NULL) {
         //puts("fin is not null");
-        setHistoryCounts(fin);
+        setHistoryCounts(fin, aliasList);
     }
     else {
         //puts("fin is null");
@@ -36,7 +37,8 @@ int main()
     printf("histcount %d \n", HISTCOUNT);
     printf("histfilecount %d\n", HISTFILECOUNT);
     puts("here");
-    // readUsh_historyFile();
+
+
 
 
     // exit program to test history file
@@ -107,7 +109,7 @@ void processString(char *string) {
     }
 }
 
-void setHistoryCounts(FILE *fin) {
+void setHistoryCounts(FILE *fin, LinkedList *theList) {
     char line[MAX];
     char lineCopy[MAX];
     int counter = 0;
@@ -115,23 +117,51 @@ void setHistoryCounts(FILE *fin) {
 
     fgets(line, MAX, fin);
     while(!feof(fin)) {
-        processString(line);
         counter++;
         fgets(line, MAX, fin);
-
-        if(counter > 2) {
-            checkForAlias(line);
-        }
     }
     rewind(fin);
+    
+    for(i = 0; i < 2; i++) {
+        puts("in for loop");
+        fgets(line, MAX, fin);
+        processString(line);
+    }
+    
+    while(!feof(fin)) {
+        // the file may contain aliases and path maybe
+        checkForAlias(fin, theList);
+    }
+    /*
+       fgets(line, MAX, fin);
+       while(!feof(fin)) {
+       checkForAlias(line, theList);
+       fgets(line, MAX, fin);
+       }
+       rewind(fin); */
 }
-void checkForAlias(char *string) {
+void checkForAlias(FILE *fin, LinkedList *theList) {
     puts("Checking for aliases");
+    char string[MAX];
+    fgets(string, MAX, fin);
+    strip(string);
+    char copy[MAX];
+    strcpy(copy, string);
+    char *isAlias;
+    isAlias = strtok(copy, " ");
+    strip(isAlias);
+
+    if(strcmp(isAlias, "alias") != 0) {
+        // the string is not an alias
+        return;
+    }
+
+
     char stringCopy[MAX];
     strcpy(stringCopy, string);
     char *left;
     char *right;
-    
+
     left = strtok(stringCopy, "=");
     right = strtok(NULL, "=");
     strtok(left, " ");
@@ -142,8 +172,10 @@ void checkForAlias(char *string) {
     printf("left: %s right: %s\n", left, right);
 
     // add the alias to the alias file? 
+    // addFirst(theList, )
+    //addLast(theList, buildNode(stdin, buildTypeAlias));
 
-    
+
 }
 void setHistoryCountsDefaults() {
 
