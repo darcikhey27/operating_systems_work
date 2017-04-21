@@ -112,12 +112,12 @@ void processString(char *string) {
 void setHistoryCounts(FILE *fin, LinkedList *theList) {
     char line[MAX];
     char lineCopy[MAX];
-    int counter = 0;
+    int recordsCount = 0;
     int i;
 
     fgets(line, MAX, fin);
     while(!feof(fin)) {
-        counter++;
+        recordsCount++;
         fgets(line, MAX, fin);
     }
     rewind(fin);
@@ -126,11 +126,14 @@ void setHistoryCounts(FILE *fin, LinkedList *theList) {
         puts("in for loop");
         fgets(line, MAX, fin);
         processString(line);
+        recordsCount--;
     }
     
-    while(!feof(fin)) {
+    while(recordsCount != 0) {
         // the file may contain aliases and path maybe
         checkForAlias(fin, theList);
+        puts("in while");
+        recordsCount--;
     }
     /*
        fgets(line, MAX, fin);
