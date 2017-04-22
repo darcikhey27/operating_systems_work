@@ -51,8 +51,7 @@ int main()
             case 5: removeFirst(wordList, cleanTypeWord);
                     break;
 
-            case 6: removeItem(wordList, buildNode(stdin, buildTypeWord_Prompt), 
-          									cleanTypeWord, compareWord);
+            case 6: removeItem(wordList, buildNode(stdin, buildTypeWord_Prompt), cleanTypeWord, compareWord);
                     break;
 
 
@@ -69,8 +68,7 @@ int main()
             case 10: removeLast(movieList, cleanTypeMovie);
                      break; 
 
-            case 11: removeItem(movieList, buildNode(stdin, buildTypeMovie_Prompt), 
-            								cleanTypeMovie, compareMovie);
+            case 11: removeItem(movieList, buildNode(stdin, buildTypeMovie_Prompt), cleanTypeMovie, compareMovie);
                      break;
 
         }// end switch

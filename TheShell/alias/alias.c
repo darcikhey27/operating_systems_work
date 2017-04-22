@@ -5,24 +5,17 @@
 //#include "actor.h"
 
 void cleanTypeAlias(void * ptr) {
-    //     if(ptr == NULL) {
-    //         puts("ptr is null");
-    //         exit(-99);
-    //     }
-    //     int i;
-    //     Alias *alias = (Alias*) ptr;
-    //     for(i = 0; i < alias->totalActors; i++) {
-    //         free(alias->actors[i].first);
-    //         free(alias->actors[i].last);
-    //         alias->actors[i].first = NULL;
-    //         alias->actors[i].last = NULL;
-    //     }
-    //     free(alias->actors);
-    //     alias->actors = NULL;
-    //     free(alias->title);
-    //     alias->title = NULL;
-    //     free(alias);
-    //     alias = NULL;
+    if(ptr == NULL) {
+        puts("from cleanTypeAlias ptr is null");
+        exit(-99);
+    }
+    Alias *alias = (Alias*) ptr;
+    free(alias->alias);
+
+    clean(alias->argc, alias->tokenized_command);
+    alias->tokenized_command = NULL;
+
+    free(alias);
 }
 
 void* buildTypeAlias(FILE *fin) {
@@ -38,8 +31,8 @@ void printTypeAlias(void* passedIn) {
     Alias alias = *((Alias*) passedIn);
     printf("command: %s\n", alias.alias);
 
-   printargs(alias.argc, alias.tokenized_command); 
-    
+    printargs(alias.argc, alias.tokenized_command); 
+
 
     // int actors = alias.totalActors;
     // for(int i = 0; i < actors; i++) {
@@ -49,7 +42,7 @@ void printTypeAlias(void* passedIn) {
 void *buildTypeAlias_string(char* string) {
     char stringCopy[MAX];
     strcpy(stringCopy, string);
-    
+
     char *left;
     char *right;
 
@@ -64,7 +57,7 @@ void *buildTypeAlias_string(char* string) {
     // allocate memory for the alias object here 
     Alias *aliasObject = (Alias*) malloc(sizeof(Alias));
     aliasObject->alias = (char*) malloc(sizeof(left) + 1);
-    
+
     strcpy(aliasObject->alias, left);
     aliasObject->argc = makeArgs(right, &(aliasObject->tokenized_command));
 
@@ -111,22 +104,22 @@ void * buildTypeAlias_Prompt(FILE * fin) {
 
 int compareAlias(const void * p1, const void * p2) {
 
-    // if(p1 == NULL || p2 == NULL) {
-    //     puts("p1 or p2 is NULL");
-    //     exit(-99);
-    // }
-    // Alias left = *((Alias*) p1);
-    // Alias right = *((Alias*) p2);
+    if(p1 == NULL || p2 == NULL) {
+        puts("p1 or p2 is NULL");
+        exit(-99);
+    }
+    Alias left = *((Alias*) p1);
+    Alias right = *((Alias*) p2);
 
-    // if(strcmp(left.title, right.title) > 0) {
-    //     return 1;
-    // }
-    // else if(strcmp(left.title, right.title) < 0) {
-    //     return -1;
-    // }
-    // else {
-    //     return left.totalActors - right.totalActors;
-    // }
+    if(strcmp(left.alias, right.alias) > 0) {
+        return 1;
+    }
+    else if(strcmp(left.alias, right.alias) < 0) {
+        return -1;
+    }
+    else {
+        return 0;
+    }
     return 0;
 }
 

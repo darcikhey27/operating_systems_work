@@ -6,6 +6,7 @@
 #include "./linkedlist/linkedList.h"
 #include "./linkedlist/listUtils.h"
 #include "./alias/alias.h"
+#include "./alias/aliasUtil.h"
 #include "./history/history.h"
 
 // linkedlist history counter
@@ -20,9 +21,7 @@ void addHistItems(FILE *fin, LinkedList *histList);
 
 
 // 
-int main()
-{
-
+int main() {
     FILE *fin = NULL;
 
     fin = openFile("ushrc");
@@ -37,6 +36,8 @@ int main()
         //puts("fin is null");
         setHistoryCountsDefaults();
     }
+    fclose(fin);
+    fin = NULL;
     //printf("histcount %d \n", HISTCOUNT);
     //printf("histfilecount %d\n", HISTFILECOUNT);
 
@@ -52,11 +53,11 @@ int main()
         // add the history file elements into the historyList
         addHistItems(fin, historyList);
     }
-
+    fclose(fin);
     puts("printing history list");
     printList(historyList, printTypeHistory);
 
-    // start program here
+    /******************** START SHELL HERE ************************/
     // exit program to test history file
 
     int argc, pipeCount;	
@@ -68,20 +69,31 @@ int main()
     fgets(s, MAX, stdin);
     strip(s);
 
-    while(strcmp(s, "exit") != 0)
-    {
+    while(strcmp(s, "exit") != 0) {
+        // add the command to the history list
+        // implement the extra credit here. histitems does not repeat
+        addLast(historyList, buildNode_Type_string(s, buildTypeHistory_string));
+
+        // if the user types an alias it will set the alias in the alias
+        checkForAlias(s, aliasList);
+        
+        if(isAlias(s, aliasList) == 0){
+            executeAlias(s, aliasList);
+            // traverse though the alias list until we find the command that maches 's'
+            // then we excecute the tokenized_command with excevp
+        }
+        
+
+        // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
-        if(pipeCount > 0)
-        {
+        if(pipeCount > 0) {
             prePipe = parsePrePipe(s, &preCount);
             postPipe = parsePostPipe(s, &postCount);
             pipeIt(prePipe, postPipe);
             clean(preCount, prePipe);
             clean(postCount, postPipe);
         }// end if pipeCount	  
-
-        else
-        {
+        else {
             argc = makeArgs(s, &argv);
             if(argc != -1)
                 forkIt(argv);
@@ -96,9 +108,44 @@ int main()
 
     }// end while
 
+    // writeHistoryFile("ush_history");
+    // clean stuff here
+    clearList(aliasList, cleanTypeAlias);
+    free(aliasList);
+    aliasList = NULL;
+    clearList(historyList, cleanTypeHistory);
+    free(historyList);
+    historyList = NULL;
+
+
     return 0;
 
 }// end main
+
+void checkForAlias(char *line, LinkedList *theList) {
+    puts("Checking for aliases");
+    char copy[MAX];
+    strcpy(copy, line);
+
+    char *isAlias;
+    isAlias = strtok(copy, " ");
+    strip(isAlias);
+
+    if(strcmp(isAlias, "alias") != 0) {
+        // the string is not an alias
+        puts("is not alias");
+        return;
+    }
+    puts("is alias");
+    // addLast here pass the fin so I can build 
+    // the node somewhere else
+    printf("the alias that will be passed in is %s\n", line);
+    addLast(theList, buildNode_Type_string(line, buildTypeAlias_string));
+
+    // TODO: pass the string instead of the fin pointer
+
+
+}
 
 FILE* openFile(char *filename) {
     FILE *fin = NULL;
@@ -156,30 +203,6 @@ void setHistoryCounts(FILE *fin, LinkedList *theList) {
        fgets(line, MAX, fin);
        }
        rewind(fin); */
-}
-void checkForAlias(char *line, LinkedList *theList) {
-    puts("Checking for aliases");
-    char copy[MAX];
-    strcpy(copy, line);
-
-    char *isAlias;
-    isAlias = strtok(copy, " ");
-    strip(isAlias);
-
-    if(strcmp(isAlias, "alias") != 0) {
-        // the string is not an alias
-        puts("is not alias");
-        return;
-    }
-    puts("is alias");
-    // addLast here pass the fin so I can build 
-    // the node somewhere else
-    printf("the alias that will be passed in is %s\n", line);
-    addLast(theList, buildNode_Type_string(line, buildTypeAlias_string));
-
-    // TODO: pass the string instead of the fin pointer
-
-
 }
 void setHistoryCountsDefaults() {
 

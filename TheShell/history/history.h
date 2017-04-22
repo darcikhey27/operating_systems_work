@@ -40,7 +40,7 @@ typedef struct history History;
  *
  * @warning - The passed in void * passedIn is checked - exit(-99) if NULL
  */
-void cleanTypeCommand(void * ptr);
+void cleanTypeHistory(void * ptr);
 
 
 /**

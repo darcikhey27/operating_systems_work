@@ -4,7 +4,7 @@
 
 void clean(int argc, char **argv) {
     int i;
-
+    puts("cleaning");
     for(i = 0; i < argc; i++) {
         free(argv[i]);
     }

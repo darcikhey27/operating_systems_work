@@ -4,16 +4,18 @@
 #include "history.h"
 #include "../utils/myUtils.h"
 
-void cleanTypeCommand(void * ptr) {
+void cleanTypeHistory(void * ptr) {
 
-    // if(ptr == NULL) {
-    //     puts("ptr is null");
-    //     exit(-99);
-    // }
-    // Command *commnad = (Command*) ptr;
-    // free(commnad->ltrs);
-    // free(commnad);
-    // commnad = NULL;
+    if(ptr == NULL) {
+        puts("from cleanTypeHistory ptr is null");
+        exit(-99);
+    }
+    History *history = (History*) ptr;
+    free(history->command);
+    
+    clean(history->argc, history->tokenized_command);
+    history->tokenized_command = NULL;
+    free(history);
 }
 
 void* buildTypeCommand(FILE *fin) {
