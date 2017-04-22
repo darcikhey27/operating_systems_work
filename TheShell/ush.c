@@ -78,7 +78,9 @@ int main() {
         checkForAlias(s, aliasList);
         
         if(isAlias(s, aliasList) == 0){
+            puts("Executing alias");
             executeAlias(s, aliasList);
+            puts("done executing alias");
             // traverse though the alias list until we find the command that maches 's'
             // then we excecute the tokenized_command with excevp
         }
