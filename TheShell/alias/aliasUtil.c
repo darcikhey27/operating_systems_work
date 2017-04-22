@@ -4,7 +4,7 @@
 #include <string.h>
 #include "alias.h"
 #include "aliasUtil.h"
-//#include "../process/process.h"
+#include "../process/process.h"
 #include "../linkedlist/linkedList.h"
 #include "../utils/myUtils.h"
 #include "../tokenize/makeArgs.h"
@@ -49,7 +49,7 @@ void executeAlias(char *s, LinkedList *theList) {
             puts("executing alias in if");
            //execvp(left.tokenized_command[0], 
            //        left.tokenized_command);
-           //forkIt(left.tokenized_command);
+           forkIt(left.tokenized_command);
             return;
         }
         prev = curr;
