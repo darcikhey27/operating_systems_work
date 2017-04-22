@@ -1,6 +1,6 @@
 #include "./pipes/pipes.h"
 #include "./utils/myUtils.h"
-//#include "./process/process.h"
+#include "./process/process.h"
 #include "./tokenize/makeArgs.h"
 
 #include "./linkedlist/linkedList.h"

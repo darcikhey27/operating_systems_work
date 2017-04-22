@@ -5,6 +5,8 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
+#include "process.h"
+
 void forkIt(char ** argv) {
     
     pid_t pid = fork();
