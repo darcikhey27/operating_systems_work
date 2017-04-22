@@ -16,9 +16,7 @@ void setHistoryCountsDefaults();
 void processString(char *string);
 FILE* openFile(char *filename);
 void checkForAlias(char *string, LinkedList *theList);
-
 void addHistItems(FILE *fin, LinkedList *histList);
-
 
 // 
 int main() {
@@ -76,6 +74,7 @@ int main() {
 
         // if the user types an alias it will set the alias in the alias
         checkForAlias(s, aliasList);
+        printf("s: %s\n", s);
         
         if(isAlias(s, aliasList) == 0){
             puts("Executing alias");
