@@ -1,7 +1,8 @@
 CC=gcc
 
-lab6:	cscd340Lab6.c ./tokenize/makeArgs.o ./utils/myUtils.o ./process/process.o ./pipes/pipes.o
-	gcc -g cscd340Lab6.c ./tokenize/makeArgs.o ./utils/myUtils.o ./process/process.o ./pipes/pipes.o -o lab6
+lab7:	ush.c ./tokenize/makeArgs.o ./utils/myUtils.o ./process/process.o ./pipes/pipes.o
+		alias/alias.o history/history.o linkedlist/linkedList.o 
+	gcc -g ush.c ./tokenize/makeArgs.o ./utils/myUtils.o ./process/process.o ./pipes/pipes.o -o lab7
 
 makeArgs.o:	./tokenize/makeArgs.c ./tokenize/makeArgs.h
 	gcc -g -c ./tokenize/makeArgs.c
@@ -19,6 +20,6 @@ clean:
 	rm ./pipes/pipes.o	
 	rm ./utils/myUtils.o
 	rm ./process/process.o
-	rm ./tokenize/makeArgs.o
+rm ./tokenize/makeArgs.o
 	rm lab6
 
