@@ -15,5 +15,9 @@ int isExecuteHistory(char *s);
 
 void executeHistNumber(char *s, LinkedList *theList);
 
+int isBangBang(char *s);
+
+void executeBangBang(LinkedList *theList);
+
 #endif 
 

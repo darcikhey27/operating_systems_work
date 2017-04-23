@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../linkedlist/linkedList.h"
+#include "../process/process.h"
 // historyUtil.c
 
 void writeHistoryFile(FILE *fin, LinkedList *theList) {
@@ -37,7 +38,7 @@ void displayTheHistory(LinkedList *theList) {
 
     int count;
 
-    if(theList->size < HISTCOUNT) {
+    if(theList->size < HISTCOUNT) { // && HISTCONT < HISTFILECOUNT
         // display all the nodes
         curr = theList->head->next;
         count = 1;
@@ -51,11 +52,14 @@ void displayTheHistory(LinkedList *theList) {
         }     
     }
     else {
-        
+
         int i;
         curr = theList->head->next;
         count = 1;
-        for(i = 0;  i < (theList->size - HISTCOUNT); i++) {
+        int stop = (theList->size - HISTCOUNT);
+        printf("stop %d\n", stop);
+
+        for(i = 0;  i < stop; i++) {
             curr =curr->next;
             count++;
         }
@@ -64,10 +68,9 @@ void displayTheHistory(LinkedList *theList) {
         while(curr != theList->head) {
             History historyItem = *((History*) curr->data);
             printf("%d  %s\n", count, historyItem.command);
-            
+
             count++;
             curr = curr->next;
-
         }
     }
 }
@@ -78,11 +81,11 @@ int isExecuteHistory(char *s) {
     strcpy(copy, s);
 
     if(copy[0] == '!') {
+        puts("is !x command");
         return 1;
     }
     return 0;
 }
-
 
 void executeHistNumber(char *s, LinkedList *theList) {
     char copy[MAX];
@@ -96,5 +99,44 @@ void executeHistNumber(char *s, LinkedList *theList) {
     commandNumber = atoi(token);
     printf("commandnumber is %d\n", commandNumber);
 
+    Node *tail = theList->head->prev;
+    int index = theList->size;
+
+    while(tail != theList->head) {
+        if(index == commandNumber) {
+            History historyItem = *((History*)tail->data);
+            printf("executing %d%s\n", commandNumber, historyItem.command);
+            forkIt(historyItem.tokenized_command);
+            return;
+        }
+        tail = tail->prev;
+        index--;
+    }
+}
+
+int isBangBang(char *s) {
+    printf("%s\n", s);
+    char copy[MAX];
+    strcpy(copy, s);
+
+    if(strcmp(copy, "!!") == 0 && strlen(copy) == 2) {
+        puts("is bang bang");
+        return 1;
+    }
+    return 0;
+}
+
+
+void executeBangBang(LinkedList *theList) {
+    if(theList == NULL) {
+        puts("The list is null bangbang()");
+        exit(-99);
+    }
+    Node *tail = theList->head->prev;
+    tail = tail->prev;
+    History historyItem = *((History*)tail->data);
+    printf("%s\n", historyItem.command);
+    forkIt(historyItem.tokenized_command);
+    return;
 }
 

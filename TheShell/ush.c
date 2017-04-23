@@ -32,13 +32,13 @@ int main() {
     if(fin != NULL) {
         //puts("fin is not null");
         setHistoryCounts(fin, aliasList);
+        fclose(fin);
+        fin = NULL;
     }
     else {
         //puts("fin is null");
         setHistoryCountsDefaults();
     }
-    fclose(fin);
-    fin = NULL;
     printf("histcount %d \n", HISTCOUNT);
     printf("histfilecount %d\n", HISTFILECOUNT);
 
@@ -54,8 +54,8 @@ int main() {
         // add the history file elements into the historyList
         addHistItems(fin, historyList);
         fclose(fin);   
+        fin = NULL;
     }
-    puts("There is not ush_history file");
     
     puts("printing history list");
     printList(historyList, printTypeHistory);
@@ -80,7 +80,7 @@ int main() {
         // if the user types an alias it will set the alias in the alias
         checkForAlias(s, aliasList);
         printf("s: %s\n", s);
-
+        // if s is an alias, execute it
         if(isAlias(s, aliasList) == 1){
             puts("Executing alias");
             executeAlias(s, aliasList);
@@ -97,10 +97,20 @@ int main() {
              puts("in else if");
               displayTheHistory(historyList);
         }
+        else if(isBangBang(s) == 1) {
+            /*
+             * this will not work if the bangbang command is an alias like
+             * if bangbang command points to ll which is an alias it will not work
+             */
+            executeBangBang(historyList);
+        }
         else if(isExecuteHistory(s) == 1) {
            //!513, or !! 
            executeHistNumber(s, historyList); 
         }
+        //else if(isChgDir(s) == 0) {
+            //changeDir(s);
+        //}
 
         // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
@@ -200,7 +210,7 @@ void setHistoryCounts(FILE *fin, LinkedList *theList) {
     //char lineCopy[MAX];
     int recordsCount = 0;
     int i;
-
+    // count the number of lines in the file
     fgets(line, MAX, fin);
     while(!feof(fin)) {
         recordsCount++;
@@ -231,7 +241,6 @@ void setHistoryCounts(FILE *fin, LinkedList *theList) {
        rewind(fin); */
 }
 void setHistoryCountsDefaults() {
-
     HISTCOUNT = 100;
     HISTFILECOUNT = 1000;
 }

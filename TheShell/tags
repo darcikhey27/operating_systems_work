@@ -8,9 +8,9 @@ ALIASUTIL_H_	alias/aliasUtil.h	2;"	d
 ALIAS_H_	alias/alias.h	2;"	d
 Alias	alias/alias.h	/^typedef struct alias Alias;$/;"	t	typeref:struct:alias
 CC	Makefile	/^CC=gcc$/;"	m
-HISTCOUNT	history/history.h	/^int HISTCOUNT;$/;"	v
-HISTCOUNTER	ush.c	/^int HISTCOUNTER = 0;$/;"	v
-HISTFILECOUNT	history/history.h	/^int HISTFILECOUNT;$/;"	v
+HISTCOUNT	linkedlist/linkedList.h	/^int HISTCOUNT; $/;"	v
+HISTCOUNTER	linkedlist/linkedList.c	/^int HISTCOUNTER = 0;$/;"	v
+HISTFILECOUNT	linkedlist/linkedList.h	/^int HISTFILECOUNT;$/;"	v
 HISTORYUTIL_H	history/historyUtil.h	2;"	d
 HISTORY_H_	history/history.h	2;"	d
 History	history/history.h	/^typedef struct history History;$/;"	t	typeref:struct:history
@@ -53,13 +53,18 @@ compareAlias	alias/alias.c	/^int compareAlias(const void * p1, const void * p2) 
 compareCommand	history/history.c	/^int compareCommand(const void * p1, const void * p2) {$/;"	f
 containsPipe	pipes/pipes.c	/^int containsPipe(char *s) {$/;"	f
 data	linkedlist/linkedList.h	/^    void * data;$/;"	m	struct:node
-displayTheHistory	history/historyUtil.c	/^void displayTheHistory(int count, LinkedList *theList) {$/;"	f
+displayTheHistory	history/historyUtil.c	/^void displayTheHistory(LinkedList *theList) {$/;"	f
 executeAlias	alias/aliasUtil.c	/^void executeAlias(char *s, LinkedList *theList) {$/;"	f
+executeBangBang	history/historyUtil.c	/^void executeBangBang(LinkedList *theList) {$/;"	f
+executeHistNumber	history/historyUtil.c	/^void executeHistNumber(char *s, LinkedList *theList) {$/;"	f
 forkIt	process/process.c	/^void forkIt(char ** argv) {$/;"	f
 head	linkedlist/linkedList.h	/^    Node * head;$/;"	m	struct:linkedlist
 history	history/history.h	/^struct history$/;"	s
 isAlias	alias/aliasUtil.c	/^int isAlias(char *s, LinkedList *theList) {$/;"	f
+isBangBang	history/historyUtil.c	/^int isBangBang(char *s) {$/;"	f
+isExecuteHistory	history/historyUtil.c	/^int isExecuteHistory(char *s) {$/;"	f
 isHistoryCommand	history/historyUtil.c	/^int isHistoryCommand(char *s) {$/;"	f
+isUnAlias	alias/aliasUtil.c	/^int isUnAlias(char *s) {$/;"	f
 linkedList	linkedlist/linkedList.c	/^LinkedList* linkedList() {$/;"	f
 linkedlist	linkedlist/linkedList.h	/^struct linkedlist$/;"	s
 main	ush.c	/^int main() {$/;"	f
@@ -87,4 +92,5 @@ sort	linkedlist/listUtils.c	/^void sort(LinkedList * theList, int (*compare)(con
 strip	utils/myUtils.c	/^void strip(char *array)$/;"	f
 tokenized_command	alias/alias.h	/^   char **tokenized_command;$/;"	m	struct:alias
 tokenized_command	history/history.h	/^   char ** tokenized_command;$/;"	m	struct:history
+unAliasCommand	alias/aliasUtil.c	/^void unAliasCommand(char *s, LinkedList *theList) {$/;"	f
 writeHistoryFile	history/historyUtil.c	/^void writeHistoryFile(FILE *fin, LinkedList *theList) {$/;"	f
