@@ -10,6 +10,7 @@
 #include "../tokenize/makeArgs.h"
 
 
+
 int isAlias(char *s, LinkedList *theList) {
     puts("in isAlias");
     if(theList->size == 0) {
@@ -22,15 +23,15 @@ int isAlias(char *s, LinkedList *theList) {
 
     Node *curr = theList->head->next;
     //Node *prev = theList->head;
-    while(curr != NULL) {
+    while(curr != theList->head) {
         Alias alias = *((Alias*) curr->data);
         printf("left.alias %s\n", alias.alias);
-        
+
         if(strcmp(alias.alias, s) == 0) {
             puts("match was found");
             return 1;
         }
-     //   prev = curr;
+        //   prev = curr;
         curr = curr->next;
     }
     return 0;
@@ -43,16 +44,74 @@ void executeAlias(char *s, LinkedList *theList) {
 
     Node *curr = theList->head->next;
     //Node *prev = theList->head;
-    while(curr != NULL) {
+    while(curr != theList->head) {
         Alias left = *((Alias*) curr->data);
         if(strcmp(left.alias, s) == 0) {
             puts("executing alias in if");
-           //execvp(left.tokenized_command[0], 
-           //        left.tokenized_command);
-           forkIt(left.tokenized_command);
+            //execvp(left.tokenized_command[0], 
+            //        left.tokenized_command);
+            forkIt(left.tokenized_command);
             return;
         }
-       // prev = curr;
+        // prev = curr;
         curr = curr->next;
     }
 }
+
+int isUnAlias(char *s) {
+    printf("s is %s\n", s);
+    char copy[MAX];
+    strcpy(copy, s);
+    char *token;
+
+    // unalias ll
+    token = strtok(copy, " ");
+    printf("token is %s\n", token);
+    strip(token);
+    if(strcmp(token, "unalias") == 0) {
+        puts("match was found");
+        return 1;
+    }
+    puts("match was not found");
+    return 0;
+}
+
+
+void unAliasCommand(char *s, LinkedList *theList) {
+    if(s == NULL || theList == NULL) {
+        puts("s is null or theList is null");
+        exit(-1);
+    }
+
+    char copy[MAX];
+    strcpy(copy, s);
+    char *token;
+
+    // unalias ll
+    token = strtok(copy, " ");
+    token = strtok(NULL, " ");
+    
+    Node *curr = theList->head->next;
+    Node *prev = theList->head;
+    while(curr != theList->head) {
+
+        Alias item = *((Alias*) curr->data);
+
+        if(strcmp(item.alias, token) == 0) {
+            printf("alias %s was removed \n", token);
+            prev->next = curr->next;
+            cleanTypeAlias(curr->data);
+            prev->next = curr->next;
+            curr->next->prev = prev;
+
+            free(curr);
+            theList->size--;
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+
+}
+
+

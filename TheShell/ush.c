@@ -13,7 +13,7 @@
 
 
 // linkedlist history counter
-int HISTCOUNTER = 0;
+//int HISTCOUNTER = 0;
 
 void setHistoryCounts(FILE *fin, LinkedList *theList);
 void setHistoryCountsDefaults();
@@ -39,8 +39,8 @@ int main() {
     }
     fclose(fin);
     fin = NULL;
-    //printf("histcount %d \n", HISTCOUNT);
-    //printf("histfilecount %d\n", HISTFILECOUNT);
+    printf("histcount %d \n", HISTCOUNT);
+    printf("histfilecount %d\n", HISTFILECOUNT);
 
     puts("printing alias list");
     printList(aliasList, printTypeAlias);
@@ -88,8 +88,14 @@ int main() {
             // traverse though the alias list until we find the command that maches 's'
             // then we excecute the tokenized_command with excevp
         }
-        else if(isHistoryCommand(s) == 0) {
-              displayTheHistory(HISTCOUNT, historyList);
+        else if(isUnAlias(s) == 1) {
+            puts("removing alias");
+            printList(aliasList, printTypeAlias);
+            unAliasCommand(s, aliasList);
+        }
+        else if(isHistoryCommand(s) == 1) {
+             puts("in else if");
+              displayTheHistory(historyList);
         }
 
         // this code here will go on the else part of the if above

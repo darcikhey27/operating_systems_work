@@ -10,4 +10,7 @@ int isAlias(char *s, LinkedList *theList);
 
 void executeAlias(char *s, LinkedList *theList);
 
+int isUnAlias(char *s);
+
+void unAliasCommand(char *s, LinkedList *theList);
 #endif 

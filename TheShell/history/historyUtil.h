@@ -9,6 +9,10 @@ void writeHistoryFile(FILE *fin, LinkedList *theList);
 int isHistoryCommand(char *);
 
  
-void displayTheHistory(int count, LinkedList *theList);
+void displayTheHistory(LinkedList *theList);
+
+int isUnAlias(char *s);
+
+void unAliasCommand(char *s, LinkedList *theList);
 #endif 
 

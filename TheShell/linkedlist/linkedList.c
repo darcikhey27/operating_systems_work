@@ -5,13 +5,15 @@
 #include "linkedList.h"
 //#include "../words/word.h"
 
+int HISTCOUNTER = 0;
+
 
 LinkedList* linkedList() {
     LinkedList *list = (LinkedList*)malloc(sizeof(LinkedList));
     list->head = (Node*) malloc(sizeof(Node));
     list->head->data = NULL;
-    list->head->next = NULL;
-    list->head->prev = NULL;
+    list->head->next = list->head;
+    list->head->prev = list->head;
     list->size = 0;
 
     return list;
@@ -27,20 +29,20 @@ void addLast(LinkedList* theList, Node *nn) {
         puts("the nn is null");
         exit(-99);
     }
-
-    if(theList->head->next == NULL) {
+    HISTCOUNTER++;
+    if(theList->head->next == theList->head) {
         addFirst(theList, nn);
         return;
     }
     Node *curr = theList->head->next;
-    while(curr->next != NULL) {
+    while(curr->next != theList->head) {
         curr = curr->next;
     }
     curr->next = nn;
     nn->prev = curr;
-    nn->next = NULL;
-    //nn->next = theList->head;
-    //theList->prev = nn;
+    //nn->next = NULL;
+    nn->next = theList->head;
+    theList->head->prev = nn;
 
     theList->size++;
 
@@ -57,13 +59,13 @@ void addFirst(LinkedList *theList, Node *nn) {
         exit(-99);
     }
     // added
-    if(theList->head->next == NULL) {
-        nn->next = NULL;
+    if(theList->head->next == theList->head) {
+        //nn->next = NULL;
         nn->prev = theList->head;
         theList->head->next = nn;
 
-        //nn->next = theList->head;
-        //theList->head->prev = nn;
+        nn->next = theList->head;
+        theList->head->prev = nn;
         theList->size++;
         return;
     }
@@ -144,7 +146,7 @@ void removeItem(LinkedList * theList, Node * nn, void (*removeData)(void *),
 void clearList(LinkedList * theList, void (*removeData)(void *)) {
     Node *current = theList->head->next;
     Node *next;
-    while(current != NULL) {
+    while(current != theList->head) {
         next = current->next;
         removeData(current->data);
         free(current);
@@ -161,7 +163,7 @@ void printList(const LinkedList * theList, void (*convertData)(void *)) {
     }
     Node *curr = theList->head->next;
     puts("-----------------------------------------");
-    while(curr != NULL) {
+    while(curr != theList->head) {
         convertData(curr->data);
         curr = curr->next;
     }

@@ -1,6 +1,16 @@
-ls -l
 ls
 pwd
-ls
-pwd
+ll
 history
+unalias ll
+alias dk='pwd'
+ls
+dk
+history
+unalias dk
+history
+ls
+pwd
+alias dk='pwd'
+history
+dk

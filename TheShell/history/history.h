@@ -15,8 +15,9 @@
  */
 
 
-int HISTCOUNT;
-int HISTFILECOUNT;
+
+//int HISTCOUNT; 
+//int HISTFILECOUNT;
 
 struct history
 {

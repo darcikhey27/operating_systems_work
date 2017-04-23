@@ -11,6 +11,7 @@ CC	Makefile	/^CC=gcc$/;"	m
 HISTCOUNT	history/history.h	/^int HISTCOUNT;$/;"	v
 HISTCOUNTER	ush.c	/^int HISTCOUNTER = 0;$/;"	v
 HISTFILECOUNT	history/history.h	/^int HISTFILECOUNT;$/;"	v
+HISTORYUTIL_H	history/historyUtil.h	2;"	d
 HISTORY_H_	history/history.h	2;"	d
 History	history/history.h	/^typedef struct history History;$/;"	t	typeref:struct:history
 LINKEDLIST_H	linkedlist/linkedList.h	11;"	d
@@ -52,11 +53,13 @@ compareAlias	alias/alias.c	/^int compareAlias(const void * p1, const void * p2) 
 compareCommand	history/history.c	/^int compareCommand(const void * p1, const void * p2) {$/;"	f
 containsPipe	pipes/pipes.c	/^int containsPipe(char *s) {$/;"	f
 data	linkedlist/linkedList.h	/^    void * data;$/;"	m	struct:node
+displayTheHistory	history/historyUtil.c	/^void displayTheHistory(int count, LinkedList *theList) {$/;"	f
 executeAlias	alias/aliasUtil.c	/^void executeAlias(char *s, LinkedList *theList) {$/;"	f
 forkIt	process/process.c	/^void forkIt(char ** argv) {$/;"	f
 head	linkedlist/linkedList.h	/^    Node * head;$/;"	m	struct:linkedlist
 history	history/history.h	/^struct history$/;"	s
 isAlias	alias/aliasUtil.c	/^int isAlias(char *s, LinkedList *theList) {$/;"	f
+isHistoryCommand	history/historyUtil.c	/^int isHistoryCommand(char *s) {$/;"	f
 linkedList	linkedlist/linkedList.c	/^LinkedList* linkedList() {$/;"	f
 linkedlist	linkedlist/linkedList.h	/^struct linkedlist$/;"	s
 main	ush.c	/^int main() {$/;"	f
@@ -84,3 +87,4 @@ sort	linkedlist/listUtils.c	/^void sort(LinkedList * theList, int (*compare)(con
 strip	utils/myUtils.c	/^void strip(char *array)$/;"	f
 tokenized_command	alias/alias.h	/^   char **tokenized_command;$/;"	m	struct:alias
 tokenized_command	history/history.h	/^   char ** tokenized_command;$/;"	m	struct:history
+writeHistoryFile	history/historyUtil.c	/^void writeHistoryFile(FILE *fin, LinkedList *theList) {$/;"	f

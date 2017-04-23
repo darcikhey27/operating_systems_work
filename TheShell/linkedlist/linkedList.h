@@ -14,6 +14,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+//int HISTCOUNTER;
+
+int HISTCOUNT; 
+int HISTFILECOUNT;
+
 /**
  * @brief The node structure.
  *
