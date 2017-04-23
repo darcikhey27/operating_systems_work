@@ -8,6 +8,11 @@
 #include "./alias/alias.h"
 #include "./alias/aliasUtil.h"
 #include "./history/history.h"
+#include "./history/historyUtil.h"
+
+#define true 1
+#define false 0
+
 
 // linkedlist history counter
 int HISTCOUNTER = 0;
@@ -21,17 +26,20 @@ void addHistItems(FILE *fin, LinkedList *histList);
 // 
 int main() {
     FILE *fin = NULL;
-
+    int ushrcFileExists = false;
+    int ushHistoryFileExists = false;
+    
     fin = openFile("ushrc");
-
     LinkedList * aliasList = linkedList();
 
     if(fin != NULL) {
         //puts("fin is not null");
+        ushrcFileExists = true;
         setHistoryCounts(fin, aliasList);
     }
     else {
         //puts("fin is null");
+        ushrcFileExists = false;
         setHistoryCountsDefaults();
     }
     fclose(fin);
@@ -49,9 +57,12 @@ int main() {
     fin = openFile("ush_history");
     if(fin != NULL) {
         // add the history file elements into the historyList
+        ushHistoryFileExists = true;
         addHistItems(fin, historyList);
+        fclose(fin);   
     }
-    fclose(fin);
+    puts("There is not ush_history file");
+    
     puts("printing history list");
     printList(historyList, printTypeHistory);
 
@@ -75,7 +86,7 @@ int main() {
         // if the user types an alias it will set the alias in the alias
         checkForAlias(s, aliasList);
         printf("s: %s\n", s);
-        
+
         if(isAlias(s, aliasList) == 0){
             puts("Executing alias");
             executeAlias(s, aliasList);
@@ -83,7 +94,8 @@ int main() {
             // traverse though the alias list until we find the command that maches 's'
             // then we excecute the tokenized_command with excevp
         }
-        
+        // else if(isHistoryCommand(s))
+        //      displayTheHistory
 
         // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
@@ -93,7 +105,9 @@ int main() {
             pipeIt(prePipe, postPipe);
             clean(preCount, prePipe);
             clean(postCount, postPipe);
+            
         }// end if pipeCount	  
+        
         else {
             argc = makeArgs(s, &argv);
             if(argc != -1)
@@ -110,10 +124,16 @@ int main() {
     }// end while
 
     printList(historyList, printTypeHistory);
-    // writeHistoryFile("ush_history");
     
-    
-    
+    if(!ushHistoryFileExists) {
+        fin = fopen("ush_history", "ab+");
+        writeHistoryFile(fin, historyList);
+    }
+    // there is not history file "ab+" open for reading and wrting and create the file
+    fin = fopen("ush_history", "a");
+    writeHistoryFile(fin, historyList);
+    fclose(fin);
+
     // clean stuff here
     clearList(aliasList, cleanTypeAlias);
     free(aliasList);

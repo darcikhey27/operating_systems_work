@@ -12,7 +12,7 @@
 /**
  * @brief The alias data structure.
  *
- * A alias contains a title, an array of actors, and an int for the number
+ * A alias containGs a title, an array of actors, and an int for the number
  *
  * @note I prefer named structures and then the typedef after the structure
  */
