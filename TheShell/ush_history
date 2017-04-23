@@ -1,25 +1,11 @@
+!!
+history
+!12
+history
+ll
 pwd
-ls
-ls -l | wc -w
-ls
-pwd
-hisotyr
 history
-!4
+alias dk='ls -l'
+dk
 history
-!5
-clear
-history
-!!
-history
-!!
-history
-!14
-ls
-!!
-history
-!5
-!11
-pwd
-ls
-!!
+unalias dk

@@ -1,5 +1,5 @@
-HISTCOUNT=25
-HISTFILECOUNT=50
+HISTCOUNT=5
+HISTFILECOUNT=10
 alias ll='ls -al'
 alias lp='ls -al'
 not alias

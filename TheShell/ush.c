@@ -75,6 +75,13 @@ int main() {
     while(strcmp(s, "exit") != 0) {
         // add the command to the history list
         // implement the extra credit here. histitems does not repeat
+        /* check the tail node.data.command == s dont write repeats to ush_history file
+           if(isRepetedCommand(s, historyList) != 0 || isBanBang(s, historyList) != 0) { 
+            addLast(historyList, buildNode_Type_string(s, buildTypeHistory_string));
+          } 
+          
+          */
+        // remove this line to test for repeated commands
         addLast(historyList, buildNode_Type_string(s, buildTypeHistory_string));
 
         // if the user types an alias it will set the alias in the alias

@@ -24,6 +24,7 @@ struct history
    char * command;
    char ** tokenized_command;
    int argc;
+   //int bangNumber;
 };
 
 typedef struct history History;

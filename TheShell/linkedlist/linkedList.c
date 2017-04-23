@@ -3,7 +3,7 @@
 #include<string.h>
 
 #include "linkedList.h"
-//#include "../words/word.h"
+#include "../history/history.h"
 
 int HISTCOUNTER = 0;
 
@@ -30,6 +30,10 @@ void addLast(LinkedList* theList, Node *nn) {
         exit(-99);
     }
     HISTCOUNTER++;
+    //History item = *((History*)nn->data);
+   // item.bangNumber = HISTCOUNTER;
+    //item.bangNumber++;
+
     if(theList->head->next == theList->head) {
         addFirst(theList, nn);
         return;

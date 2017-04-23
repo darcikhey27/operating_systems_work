@@ -9,14 +9,35 @@
 void writeHistoryFile(FILE *fin, LinkedList *theList) {
 
     //puts("about to add to history list");
+
+    printf("the list->size is %d\n", theList->size);
     Node *curr = theList->head->next;
-    while(curr != theList->head) {
-
+    printf("the HISTFILECOUNT is %d\n", HISTFILECOUNT);
+    if(theList->size < HISTFILECOUNT) {
+        // write all the histtory nodes
         History left = *((History*) curr->data);
-        //printf("writing this %s to file\n", left.command);
-        fprintf(fin, "%s\n", left.command); 
+        while(curr != theList->head) {
 
-        curr = curr->next;
+            History left = *((History*) curr->data);
+            printf("writing %s\n", left.command);
+            fprintf(fin, "%s\n", left.command); 
+            curr = curr->next;
+            // write to file here with fprintf()...
+        }
+    }
+    else {
+        printf("the list-size biggger than HISTFILECOUNT");
+        for(int i = 0; i < (theList->size - HISTFILECOUNT -1); i++) {
+            curr = curr->next;
+        }
+        while(curr != theList->head) {
+
+            History left = *((History*) curr->data);
+            printf("writing %s\n", left.command);
+            fprintf(fin, "%s\n", left.command); 
+            
+            curr = curr->next;
+        }
     }
 }
 
@@ -105,7 +126,8 @@ void executeHistNumber(char *s, LinkedList *theList) {
     while(tail != theList->head) {
         if(index == commandNumber) {
             History historyItem = *((History*)tail->data);
-            printf("executing %d%s\n", commandNumber, historyItem.command);
+            printf("executing %d %s\n", commandNumber, 
+                    historyItem.command);
             forkIt(historyItem.tokenized_command);
             return;
         }
@@ -133,9 +155,12 @@ void executeBangBang(LinkedList *theList) {
         exit(-99);
     }
     Node *tail = theList->head->prev;
-    tail = tail->prev;
     History historyItem = *((History*)tail->data);
-    printf("%s\n", historyItem.command);
+    printf("tail command: %s\n",historyItem.command );
+    
+    tail = tail->prev;// remove this for the extracredit 
+    historyItem = *((History*)tail->data);
+    printf("tail command %s\n", historyItem.command);
     forkIt(historyItem.tokenized_command);
     return;
 }
