@@ -21,6 +21,9 @@ void processString(char *string);
 FILE* openFile(char *filename);
 void checkForAlias(char *string, LinkedList *theList);
 void addHistItems(FILE *fin, LinkedList *histList);
+int isChgDir(char *path);
+
+void changeDir(char *s);
 
 // 
 int main() {
@@ -115,9 +118,9 @@ int main() {
            //!513, or !! 
            executeHistNumber(s, historyList); 
         }
-        //else if(isChgDir(s) == 0) {
-            //changeDir(s);
-        //}
+        else if(isChgDir(s) == 1) {
+            changeDir(s);
+        }
 
         // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
@@ -274,4 +277,30 @@ void addHistItems(FILE *fin, LinkedList *histList) {
         puts("in while");
         recordsCount--;
     }
+}
+
+int isChgDir(char *path) {
+    char *token;
+    char copy[MAX];
+    strcpy(copy, path);
+
+    token = strtok(copy, " ");
+    if(strcmp(token, "cd") == 0) {
+        return 1;
+    }
+    return 0;
+}
+
+
+void changeDir(char *s) {
+    char *token;
+    char path[MAX];
+    char copy[MAX];
+    strcpy(copy, s);
+
+    token = strtok(copy, " ");
+    token = strtok(NULL, " ");
+    strcpy(path, token);
+
+    chdir(path);
 }

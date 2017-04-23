@@ -2,10 +2,10 @@ pwd
 ls
 cd pipes
 pwd
-pwd
-ls
-cd pipes
-pwd
 cd ../
 pwd
 ext
+ls
+cd pipes
+ls
+pwd
