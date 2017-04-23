@@ -39,6 +39,8 @@ void addLast(LinkedList* theList, Node *nn) {
     curr->next = nn;
     nn->prev = curr;
     nn->next = NULL;
+    //nn->next = theList->head;
+    //theList->prev = nn;
 
     theList->size++;
 
@@ -60,6 +62,8 @@ void addFirst(LinkedList *theList, Node *nn) {
         nn->prev = theList->head;
         theList->head->next = nn;
 
+        //nn->next = theList->head;
+        //theList->head->prev = nn;
         theList->size++;
         return;
     }

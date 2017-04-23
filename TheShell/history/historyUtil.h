@@ -6,5 +6,9 @@
 
 void writeHistoryFile(FILE *fin, LinkedList *theList);
 
+int isHistoryCommand(char *);
+
+ 
+void displayTheHistory(int count, LinkedList *theList);
 #endif 
 

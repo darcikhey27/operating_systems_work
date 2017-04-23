@@ -21,7 +21,15 @@ void writeHistoryFile(FILE *fin, LinkedList *theList) {
 
 int isHistoryCommand(char *s) {
     if(strcmp(s, "history") == 0) {
+        puts("you typed history");
         return 1;
     }
     return 0;
+}
+
+void displayTheHistory(int count, LinkedList *theList) {
+    
+    
+
+
 }

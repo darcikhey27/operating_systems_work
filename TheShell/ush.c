@@ -10,8 +10,6 @@
 #include "./history/history.h"
 #include "./history/historyUtil.h"
 
-#define true 1
-#define false 0
 
 
 // linkedlist history counter
@@ -27,20 +25,16 @@ void addHistItems(FILE *fin, LinkedList *histList);
 // 
 int main() {
     FILE *fin = NULL;
-    int ushrcFileExists = false;
-    int ushHistoryFileExists = false;
     
     fin = openFile("ushrc");
     LinkedList * aliasList = linkedList();
 
     if(fin != NULL) {
         //puts("fin is not null");
-        ushrcFileExists = true;
         setHistoryCounts(fin, aliasList);
     }
     else {
         //puts("fin is null");
-        ushrcFileExists = false;
         setHistoryCountsDefaults();
     }
     fclose(fin);
@@ -58,7 +52,6 @@ int main() {
     fin = openFile("ush_history");
     if(fin != NULL) {
         // add the history file elements into the historyList
-        ushHistoryFileExists = true;
         addHistItems(fin, historyList);
         fclose(fin);   
     }
@@ -95,9 +88,9 @@ int main() {
             // traverse though the alias list until we find the command that maches 's'
             // then we excecute the tokenized_command with excevp
         }
-        //else if(isHistoryCommand(s) == 0) {
-              //displayTheHistory(HISTCOUNT, historyList);
-        //}
+        else if(isHistoryCommand(s) == 0) {
+              displayTheHistory(HISTCOUNT, historyList);
+        }
 
         // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
