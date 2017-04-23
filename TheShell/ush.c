@@ -109,7 +109,11 @@ int main() {
 
     }// end while
 
+    printList(historyList, printTypeHistory);
     // writeHistoryFile("ush_history");
+    
+    
+    
     // clean stuff here
     clearList(aliasList, cleanTypeAlias);
     free(aliasList);
@@ -172,7 +176,7 @@ void processString(char *string) {
 
 void setHistoryCounts(FILE *fin, LinkedList *theList) {
     char line[MAX];
-    char lineCopy[MAX];
+    //char lineCopy[MAX];
     int recordsCount = 0;
     int i;
 

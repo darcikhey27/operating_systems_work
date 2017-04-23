@@ -21,7 +21,7 @@ int isAlias(char *s, LinkedList *theList) {
     strcpy(sCopy, s);
 
     Node *curr = theList->head->next;
-    Node *prev = theList->head;
+    //Node *prev = theList->head;
     while(curr != NULL) {
         Alias alias = *((Alias*) curr->data);
         printf("left.alias %s\n", alias.alias);
@@ -30,7 +30,7 @@ int isAlias(char *s, LinkedList *theList) {
             puts("match was found");
             return 0;
         }
-        prev = curr;
+     //   prev = curr;
         curr = curr->next;
     }
     return -1;
@@ -42,7 +42,7 @@ void executeAlias(char *s, LinkedList *theList) {
     strcpy(sCopy, s);
 
     Node *curr = theList->head->next;
-    Node *prev = theList->head;
+    //Node *prev = theList->head;
     while(curr != NULL) {
         Alias left = *((Alias*) curr->data);
         if(strcmp(left.alias, s) == 0) {
@@ -52,7 +52,7 @@ void executeAlias(char *s, LinkedList *theList) {
            forkIt(left.tokenized_command);
             return;
         }
-        prev = curr;
+       // prev = curr;
         curr = curr->next;
     }
 }

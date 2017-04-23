@@ -42,7 +42,7 @@ void* buildTypeCommand(FILE *fin) {
     // // get rid of carriage return
     // //fgets(temp, 10, fin);
     // return commnad;
-
+    return NULL;
 }
 void * buildTypeHistory_string(char *string) {
     char stringCopy[MAX];
@@ -82,6 +82,7 @@ void * buildTypeCommand_Prompt(FILE * fin) {
     // commnad->len = len;
 
     // return commnad;
+    return NULL;
 
 }
 
@@ -95,5 +96,6 @@ int compareCommand(const void * p1, const void * p2) {
     // Command right = *((Command*)p2);
 
     // return strcmp(left.ltrs, right.ltrs);
+    return 0;
 }
 

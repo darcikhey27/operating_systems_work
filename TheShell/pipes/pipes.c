@@ -26,7 +26,7 @@ char** parsePrePipe(char *s, int* preCount) {
 
     //printf("in parsePrePipe()\n");
     // read the string until we see a pipe
-    int stringlen = strlen(s);
+    //int stringlen = strlen(s);
 
     char *token;
     char line[MAX];
