@@ -7,13 +7,21 @@
 
 void writeHistoryFile(FILE *fin, LinkedList *theList) {
 
-    puts("about to add to history list");
+    //puts("about to add to history list");
     Node *curr = theList->head->next;
     while(curr != NULL) {
         
         History left = *((History*) curr->data);
-        printf("writing this %s to file\n", left.command);
+        //printf("writing this %s to file\n", left.command);
         fprintf(fin, "%s\n", left.command); 
+
+        curr = curr->next;
     }
-    // write to history file here
+}
+
+int isHistoryCommand(char *s) {
+    if(strcmp(s, "history") == 0) {
+        return 1;
+    }
+    return 0;
 }

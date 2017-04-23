@@ -28,12 +28,12 @@ int isAlias(char *s, LinkedList *theList) {
         
         if(strcmp(alias.alias, s) == 0) {
             puts("match was found");
-            return 0;
+            return 1;
         }
      //   prev = curr;
         curr = curr->next;
     }
-    return -1;
+    return 0;
 }
 
 void executeAlias(char *s, LinkedList *theList) {

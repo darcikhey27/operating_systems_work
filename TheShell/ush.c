@@ -16,6 +16,7 @@
 
 // linkedlist history counter
 int HISTCOUNTER = 0;
+
 void setHistoryCounts(FILE *fin, LinkedList *theList);
 void setHistoryCountsDefaults();
 void processString(char *string);
@@ -87,15 +88,16 @@ int main() {
         checkForAlias(s, aliasList);
         printf("s: %s\n", s);
 
-        if(isAlias(s, aliasList) == 0){
+        if(isAlias(s, aliasList) == 1){
             puts("Executing alias");
             executeAlias(s, aliasList);
             puts("done executing alias");
             // traverse though the alias list until we find the command that maches 's'
             // then we excecute the tokenized_command with excevp
         }
-        // else if(isHistoryCommand(s))
-        //      displayTheHistory
+        //else if(isHistoryCommand(s) == 0) {
+              //displayTheHistory(HISTCOUNT, historyList);
+        //}
 
         // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
@@ -123,14 +125,10 @@ int main() {
 
     }// end while
 
+    puts("printing history list --------------");
     printList(historyList, printTypeHistory);
-    
-    if(!ushHistoryFileExists) {
-        fin = fopen("ush_history", "ab+");
-        writeHistoryFile(fin, historyList);
-    }
     // there is not history file "ab+" open for reading and wrting and create the file
-    fin = fopen("ush_history", "a");
+    fin = fopen("ush_history", "w");
     writeHistoryFile(fin, historyList);
     fclose(fin);
 
