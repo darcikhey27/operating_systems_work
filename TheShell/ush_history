@@ -1,16 +1,36 @@
 ls
 pwd
 ll
-history
-unalias ll
-alias dk='pwd'
-ls
-dk
-history
-unalias dk
-history
 ls
 pwd
-alias dk='pwd'
+ls -l | wc -w
+clear
+ls
+pwd
+ls
+ll
+ls -l
+ls
+ls -l shell
+whoami
 history
-dk
+ls
+ls
+ls
+ls
+ls
+ls
+history
+pwd
+ls
+pwd
+history
+history
+ls
+history
+history
+history
+history
+clear
+history
+history

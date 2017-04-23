@@ -11,8 +11,9 @@ int isHistoryCommand(char *);
  
 void displayTheHistory(LinkedList *theList);
 
-int isUnAlias(char *s);
+int isExecuteHistory(char *s);
 
-void unAliasCommand(char *s, LinkedList *theList);
+void executeHistNumber(char *s, LinkedList *theList);
+
 #endif 
 

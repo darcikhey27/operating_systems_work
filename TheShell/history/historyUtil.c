@@ -33,12 +33,14 @@ void displayTheHistory(LinkedList *theList) {
         exit(-99);
     } 
 
-    Node *curr = theList->head->next;
+    Node *curr;
 
-    int displayCount = HISTCOUNT;
-    int count = 1;
-    if(theList->size < displayCount) {
+    int count;
+
+    if(theList->size < HISTCOUNT) {
         // display all the nodes
+        curr = theList->head->next;
+        count = 1;
         while(curr != theList->head) {
 
             History historyItem = *((History*) curr->data);
@@ -48,5 +50,51 @@ void displayTheHistory(LinkedList *theList) {
             count++;
         }     
     }
+    else {
+        
+        int i;
+        curr = theList->head->next;
+        count = 1;
+        for(i = 0;  i < (theList->size - HISTCOUNT); i++) {
+            curr =curr->next;
+            count++;
+        }
+
+        // only display elements from the tail of the list to stop pointer
+        while(curr != theList->head) {
+            History historyItem = *((History*) curr->data);
+            printf("%d  %s\n", count, historyItem.command);
+            
+            count++;
+            curr = curr->next;
+
+        }
+    }
+}
+
+
+int isExecuteHistory(char *s) {
+    char copy[MAX];
+    strcpy(copy, s);
+
+    if(copy[0] == '!') {
+        return 1;
+    }
+    return 0;
+}
+
+
+void executeHistNumber(char *s, LinkedList *theList) {
+    char copy[MAX];
+    strcpy(copy, s);
+    char* token;
+    int commandNumber;
+
+    token = strtok(copy, "!");
+    printf("token is %s\n", token);
+    strip(token); 
+    commandNumber = atoi(token);
+    printf("commandnumber is %d\n", commandNumber);
+
 }
 

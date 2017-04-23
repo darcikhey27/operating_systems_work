@@ -97,6 +97,10 @@ int main() {
              puts("in else if");
               displayTheHistory(historyList);
         }
+        else if(isExecuteHistory(s) == 1) {
+           //!513, or !! 
+           executeHistNumber(s, historyList); 
+        }
 
         // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
