@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "alias.h"
+#include "../linkedlist/linkedList.h"
 //#include "actor.h"
 
 void cleanTypeAlias(void * ptr) {
@@ -28,16 +29,12 @@ void* buildTypeAlias(FILE *fin) {
 }
 
 void printTypeAlias(void* passedIn) {
+
     Alias alias = *((Alias*) passedIn);
-    printf("command: %s\n", alias.alias);
+    printf("alias %s='", alias.alias);
 
     printargs(alias.argc, alias.tokenized_command); 
 
-
-    // int actors = alias.totalActors;
-    // for(int i = 0; i < actors; i++) {
-    //     printf("%s %s\n", alias.actors[i].first, alias.actors[i].last);
-    // }
 }
 void *buildTypeAlias_string(char* string) {
     char stringCopy[MAX];
@@ -53,7 +50,7 @@ void *buildTypeAlias_string(char* string) {
     left = strtok(NULL, " ");
     right = strtok(right, "'");
 
-    printf("left: %s right: %s\n", left, right);
+    //printf("left: %s right: %s\n", left, right);
     // allocate memory for the alias object here 
     Alias *aliasObject = (Alias*) malloc(sizeof(Alias));
     aliasObject->alias = (char*) malloc(sizeof(left) + 1);

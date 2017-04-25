@@ -12,12 +12,12 @@
 
 
 int isAlias(char *s, LinkedList *theList) {
-    puts("in isAlias");
+    //puts("in isAlias");
     if(theList->size == 0) {
         puts("theList size is 0");
         return -1;
     }
-    puts("checking for");
+    //puts("checking for");
     char sCopy[MAX];
     strcpy(sCopy, s);
 
@@ -25,10 +25,10 @@ int isAlias(char *s, LinkedList *theList) {
     //Node *prev = theList->head;
     while(curr != theList->head) {
         Alias alias = *((Alias*) curr->data);
-        printf("left.alias %s\n", alias.alias);
+        //printf("left.alias %s\n", alias.alias);
 
         if(strcmp(alias.alias, s) == 0) {
-            puts("match was found");
+           // puts("match was found");
             return 1;
         }
         //   prev = curr;
@@ -47,7 +47,9 @@ void executeAlias(char *s, LinkedList *theList) {
     while(curr != theList->head) {
         Alias left = *((Alias*) curr->data);
         if(strcmp(left.alias, s) == 0) {
-            puts("executing alias in if");
+            //puts("executing alias in if");
+            // add this command to the alias linkedlist
+            //
             //execvp(left.tokenized_command[0], 
             //        left.tokenized_command);
             forkIt(left.tokenized_command);
@@ -59,20 +61,20 @@ void executeAlias(char *s, LinkedList *theList) {
 }
 
 int isUnAlias(char *s) {
-    printf("s is %s\n", s);
+    //printf("s is %s\n", s);
     char copy[MAX];
     strcpy(copy, s);
     char *token;
 
     // unalias ll
     token = strtok(copy, " ");
-    printf("token is %s\n", token);
+    //printf("token is %s\n", token);
     strip(token);
     if(strcmp(token, "unalias") == 0) {
-        puts("match was found");
+       // puts("match was found");
         return 1;
     }
-    puts("match was not found");
+    //puts("match was not found");
     return 0;
 }
 

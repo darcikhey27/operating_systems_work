@@ -1,11 +1,21 @@
+ls 
 pwd
+alias
+history
+!23
 ls
-cd pipes
 pwd
-pwd
+clear
+ll
+history
+!23
 ls
-cd pipes
+cat ushrc
+!!
+clear
+history
+!25
+history
+alias
 pwd
-cd ../
-pwd
-ext
+clear

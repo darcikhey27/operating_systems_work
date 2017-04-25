@@ -4,7 +4,7 @@
 
 void clean(int argc, char **argv) {
     int i;
-    //puts("cleaning");
+    puts("cleaning");
     for(i = 0; i < argc; i++) {
         free(argv[i]);
     }
@@ -14,10 +14,8 @@ void clean(int argc, char **argv) {
 void printargs(int argc, char **argv)
 {
     int x;
-    for(x = 0; x < argc; x++) {
-        printf("%s", argv[x]);
-    }
-    printf("'\n");
+    for(x = 0; x < argc; x++)
+        printf("%s\n", argv[x]);
 
 }// end printargs
 

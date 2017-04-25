@@ -157,7 +157,7 @@ void clearList(LinkedList * theList, void (*removeData)(void *)) {
         current = next;
     }
     free(theList->head);
-    puts("A list has been deleted");
+    //puts("A list has been deleted");
 }
 void printList(const LinkedList * theList, void (*convertData)(void *)) {
 
@@ -166,10 +166,10 @@ void printList(const LinkedList * theList, void (*convertData)(void *)) {
         return;
     }
     Node *curr = theList->head->next;
-    puts("-----------------------------------------");
+    //puts("-----------------------------------------");
     while(curr != theList->head) {
         convertData(curr->data);
         curr = curr->next;
     }
-    puts("-----------------------------------------");
+    //puts("-----------------------------------------");
 }

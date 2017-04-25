@@ -3,6 +3,5 @@
 
 void forkIt(char ** argv);
 
-void forkItWithRedirect(char **left, char** right);
-
+void forkItWithRedirection(char *s);
 #endif
