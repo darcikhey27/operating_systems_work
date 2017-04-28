@@ -1,17 +1,26 @@
 CC=gcc
 
 
-lab7: ush.c alias/alias.o history/history.o linkedlist/linkedList.o pipes/pipes.o process/process.o tokenize/makeArgs.o utils/myUtils.o
-	gcc ush.c alias/alias.o history/history.o linkedlist/linkedList.o pipes/pipes.o process/process.o tokenize/makeArgs.o utils/myUtils.o -o lab7
+ush: cscd340Lab7.c alias/alias.o aliasUtil.o history/history.o historyUtil.o linkedlist/linkedList.o listUtils.o pipes/pipes.o process/process.o tokenize/makeArgs.o utils/myUtils.o
+	gcc cscd340Lab7.c alias/alias.o aliasUtil.o history/history.o historyUtil.o linkedlist/linkedList.o listUtils.o pipes/pipes.o process/process.o tokenize/makeArgs.o utils/myUtils.o -o ush
 
-alias.o: alias/alias.c alias/alias.h alias/aliasUtil.c alias/aliasUtil.c
-	gcc -g -c alias/alias.c alias/aliasUtil.c 
+alias.o: alias/alias.c alias/alias.h
+	gcc -g -c alias/alias.c
+
+aliasUtil.o: alias/aliasUtil.c alias/aliasUtil.h
+	gcc -g -c alias/aliasUtil.c
 
 history.o: history/history.c history/history.h
 	gcc -g -c history/history.c 
 
-linkedList.o: linkedlist/linkedList.c linkedlist/linkedList.h linkedlist/listUtils.c linkedlist/listUtils.h linkedlist/requiredIncludes.h
-	gcc -g -c linkedlist/linkedList.c linkedlist/listUtils.c 
+historyUtil.o: history/historyUtil.c history/historyUtil.h
+	gcc -g -c history/historyUtil.c 
+
+linkedList.o: linkedlist/linkedList.c linkedlist/linkedList.h
+	gcc -g -c linkedlist/linkedList.c
+
+listUtils.o: linkedlist/listUtils.c linkedlist/listUtils.h
+	gcc -g -c linkedlist/listUtils.c
 
 pipes.o:	pipes/pipes.c pipes/pipes.h
 	gcc -g -c pipes/pipes.c 

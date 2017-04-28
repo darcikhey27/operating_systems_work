@@ -61,40 +61,6 @@ void *buildTypeAlias_string(char* string) {
     return aliasObject; // create alias object and return it
 }
 void * buildTypeAlias_Prompt(FILE * fin) {
-    // char title[MAX];
-    // int totalActors;
-    // Actor *actors;
-    // char first[MAX];
-    // char last[MAX];
-    // int i;
-
-    // printf("Enter the title for the alias: ");
-    // fgets(title, MAX, fin);
-    // strip(title);
-
-    // printf("Enter total actors: ");
-    // fscanf(fin, "%d", &totalActors);
-
-    // actors = (Actor*) malloc(sizeof(Actor) * totalActors);
-
-    // for(i = 0; i < totalActors; i++) {
-    //     printf("Enter name <space> lastname for actor %d: ", i+1);
-    //     fscanf(fin, "%s %s", first, last);
-    //     strip(first);
-    //     strip(last);
-
-    //     actors[i].first = (char*) malloc(strlen(first)+ 1);
-    //     strcpy(actors[i].first, first);
-
-    //     actors[i].last = (char*) malloc(strlen(last)+1);
-    //     strcpy(actors[i].last, last);
-    // }
-
-    // Alias *alias  = (Alias*) malloc(sizeof(Alias));
-    // alias->actors = actors;
-    // alias->totalActors = totalActors;
-    // alias->title = (char*) malloc(strlen(title)+ 1);
-    // strcpy(alias->title, title);
 
     return NULL;
 }

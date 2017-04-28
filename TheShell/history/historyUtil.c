@@ -54,7 +54,7 @@ void displayTheHistory(LinkedList *theList) {
         printf("The list is null displayTheHistory()\n");
         exit(-99);
     } 
-
+    //puts("displaying history");
     Node *curr;
 
     int count;

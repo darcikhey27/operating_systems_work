@@ -1,0 +1,4 @@
+HISTCOUNT=15
+HISTFILECOUNT=30
+alias ll='ls -al'
+alias lp='ls -al'

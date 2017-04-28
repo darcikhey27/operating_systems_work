@@ -14,7 +14,7 @@
 int isAlias(char *s, LinkedList *theList) {
     //puts("in isAlias");
     if(theList->size == 0) {
-        puts("theList size is 0");
+        //puts("theList size is 0");
         return -1;
     }
     //puts("checking for");

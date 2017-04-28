@@ -10,9 +10,6 @@
 #include "./history/history.h"
 #include "./history/historyUtil.h"
 
-// linkedlist history counter
-//int HISTCOUNTER = 0;
-
 void setHistoryCounts(FILE *fin, LinkedList *theList);
 void setHistoryCountsDefaults();
 void processString(char *string);
@@ -25,7 +22,7 @@ void changeDir(char *s);
 int main() {
     FILE *fin = NULL;
 
-    fin = openFile("ushrc");
+    fin = openFile(".ushrc");
     LinkedList * aliasList = linkedList();
 
     if(fin != NULL) {
@@ -35,7 +32,7 @@ int main() {
         fin = NULL;
     }
     else {
-        puts("fin is null");
+        //puts("fin is null");
         setHistoryCountsDefaults();
     }
     //printf("HISTCOUNT %d \n", HISTCOUNT);
@@ -48,9 +45,10 @@ int main() {
     LinkedList *historyList = linkedList();
 
     //puts("reading ush_history file");
-    fin = openFile("ush_history");
+    fin = openFile(".ush_history");
     if(fin != NULL) {
         // add the history file elements into the historyList
+        //puts("reading history");
         addHistItems(fin, historyList);
         fclose(fin);   
         fin = NULL;
@@ -60,7 +58,6 @@ int main() {
     //printList(historyList, printTypeHistory);
 
     /******************** START SHELL HERE ************************/
-    // exit program to test history file
 
     int argc, pipeCount;	
     char **argv = NULL, s[MAX];
@@ -76,27 +73,15 @@ int main() {
         if(strlen(s) == 0) {
             goto REPROMPT; 
         } 
-        
-        /* check the tail node.data.command == s dont write repeats to ush_history file
-           if(isRepetedCommand(s, historyList) != 0 || isBanBang(s, historyList) != 0) { 
-           addLast(historyList, buildNode_Type_string(s, buildTypeHistory_string));
-           } 
-            */
-        // remove this line to test for repeated commands
+
         addLast(historyList, buildNode_Type_string(s, buildTypeHistory_string));
 
         // if the user types an alias it will set the alias in the alias
         checkForAlias(s, aliasList);
-        //printf("s: %s\n", s);
+
         // if s is an alias, execute it
         if(isAlias(s, aliasList) == 1){
-            //if(displayAliasList(s, aliasList) == 0) displayAliasList(s, aliasList);
-           // puts("Executing alias");
-            //printf("%s\n", s);
             executeAlias(s, aliasList);
-            //puts("done executing alias");
-            // traverse though the alias list until we find the command that maches 's'
-            // then we excecute the tokenized_command with excevp
         }
         else if(isUnAlias(s) == 1) {
             //puts("removing alias");
@@ -104,30 +89,18 @@ int main() {
             unAliasCommand(s, aliasList);
         }
         else if(isHistoryCommand(s) == 1) {
-            //    puts("in else if");
+            //puts("is hisotry command");
             displayTheHistory(historyList);
         }
         else if(isBangBang(s) == 1) {
-            // // add the last command executed by the bang bang
-            /*  addLast(historyList, buildNode_Type_string(s, buildTypeHistory_string));
-             * this will not work if the bangbang command is an alias like
-             * if bangbang command points to ll which is an alias it will not work
-             */
-            // char *command = excuteBangBang(historyList);
-            //addLast(historyList, buildNode_Type_string(command, buildTypeHistory_string));
             executeBangBang(historyList);
         }
         else if(isExecuteHistory(s) == 1) {
-            //!513, or !! 
             executeHistNumber(s, historyList); 
-
-            // also add this command to the history list
         }
         else if(isChgDir(s) == 1) {
             changeDir(s);
         }
-        //else if(isRedirect(s) == 0) {forkItWithRedirect()}
-
         // this code here will go on the else part of the if above
         pipeCount = containsPipe(s);
         if(pipeCount > 0) {
@@ -146,8 +119,8 @@ int main() {
             clean(argc, argv);
             argv = NULL;
         }
-        REPROMPT:
-        
+REPROMPT:
+
         printf("command?: ");
         fgets(s, MAX, stdin);
         strip(s);
@@ -157,7 +130,7 @@ int main() {
     //puts("printing history list --------------");
     //printList(historyList, printTypeHistory);
     // there is not history file "ab+" open for reading and wrting and create the file
-    fin = fopen("ush_history", "w");
+    fin = fopen(".ush_history", "w");
     writeHistoryFile(fin, historyList);
     fclose(fin);
 
@@ -174,7 +147,10 @@ int main() {
 }// end main
 
 void checkForAlias(char *line, LinkedList *theList) {
-  
+    if(strlen(line) == 0) {
+        return;
+    }
+
     // if they typed the alias command by itselft, display the alias linkedlist
     if(strlen(line) == strlen("alias") && strcmp(line, "alias") == 0) {
         //print alias list
@@ -182,7 +158,7 @@ void checkForAlias(char *line, LinkedList *theList) {
         printList(theList, printTypeAlias);
         return;
     } 
-    
+
     //puts("Checking for aliases");
     char copy[MAX];
     strcpy(copy, line);
@@ -190,7 +166,7 @@ void checkForAlias(char *line, LinkedList *theList) {
     char *isAlias;
     isAlias = strtok(copy, " ");
     strip(isAlias);
-   
+
     if(strcmp(isAlias, "alias") != 0) {
         // the string is not an alias
         //puts("is not alias");

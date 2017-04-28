@@ -27,7 +27,7 @@ PIPES_H	pipes/pipes.h	2;"	d
 PROCESS_H	process/process.h	2;"	d
 REQUIREDINCLUDES_H	linkedlist/requiredIncludes.h	9;"	d
 addFirst	linkedlist/linkedList.c	/^void addFirst(LinkedList *theList, Node *nn) {$/;"	f
-addHistItems	ush.c	/^void addHistItems(FILE *fin, LinkedList *histList) {$/;"	f
+addHistItems	cscd340Lab7.c	/^void addHistItems(FILE *fin, LinkedList *histList) {$/;"	f
 addLast	linkedlist/linkedList.c	/^void addLast(LinkedList* theList, Node *nn) {$/;"	f
 alias	alias/alias.h	/^   char *alias;$/;"	m	struct:alias
 alias	alias/alias.h	/^struct alias$/;"	s
@@ -43,7 +43,8 @@ buildTypeAlias_string	alias/alias.c	/^void *buildTypeAlias_string(char* string) 
 buildTypeCommand	history/history.c	/^void* buildTypeCommand(FILE *fin) {$/;"	f
 buildTypeCommand_Prompt	history/history.c	/^void * buildTypeCommand_Prompt(FILE * fin) {$/;"	f
 buildTypeHistory_string	history/history.c	/^void * buildTypeHistory_string(char *string) {$/;"	f
-checkForAlias	ush.c	/^void checkForAlias(char *line, LinkedList *theList) {$/;"	f
+changeDir	cscd340Lab7.c	/^void changeDir(char *s) {$/;"	f
+checkForAlias	cscd340Lab7.c	/^void checkForAlias(char *line, LinkedList *theList) {$/;"	f
 clean	tokenize/makeArgs.c	/^void clean(int argc, char **argv) {$/;"	f
 cleanTypeAlias	alias/alias.c	/^void cleanTypeAlias(void * ptr) {$/;"	f
 cleanTypeHistory	history/history.c	/^void cleanTypeHistory(void * ptr) {$/;"	f
@@ -58,21 +59,23 @@ executeAlias	alias/aliasUtil.c	/^void executeAlias(char *s, LinkedList *theList)
 executeBangBang	history/historyUtil.c	/^void executeBangBang(LinkedList *theList) {$/;"	f
 executeHistNumber	history/historyUtil.c	/^void executeHistNumber(char *s, LinkedList *theList) {$/;"	f
 forkIt	process/process.c	/^void forkIt(char ** argv) {$/;"	f
+forkItWithRedirect	process/process.c	/^void forkItWithRedirect(char **preRedirect, char** postRedirect) {$/;"	f
 head	linkedlist/linkedList.h	/^    Node * head;$/;"	m	struct:linkedlist
 history	history/history.h	/^struct history$/;"	s
 isAlias	alias/aliasUtil.c	/^int isAlias(char *s, LinkedList *theList) {$/;"	f
 isBangBang	history/historyUtil.c	/^int isBangBang(char *s) {$/;"	f
+isChgDir	cscd340Lab7.c	/^int isChgDir(char *path) {$/;"	f
 isExecuteHistory	history/historyUtil.c	/^int isExecuteHistory(char *s) {$/;"	f
 isHistoryCommand	history/historyUtil.c	/^int isHistoryCommand(char *s) {$/;"	f
 isUnAlias	alias/aliasUtil.c	/^int isUnAlias(char *s) {$/;"	f
 linkedList	linkedlist/linkedList.c	/^LinkedList* linkedList() {$/;"	f
 linkedlist	linkedlist/linkedList.h	/^struct linkedlist$/;"	s
-main	ush.c	/^int main() {$/;"	f
+main	cscd340Lab7.c	/^int main() {$/;"	f
 makeArgs	tokenize/makeArgs.c	/^int makeArgs(char *s, char *** argv) {$/;"	f
 menu	utils/myUtils.c	/^int menu()$/;"	f
 next	linkedlist/linkedList.h	/^    struct node * next;$/;"	m	struct:node	typeref:struct:node::node
 node	linkedlist/linkedList.h	/^struct node$/;"	s
-openFile	ush.c	/^FILE* openFile(char *filename) {$/;"	f
+openFile	cscd340Lab7.c	/^FILE* openFile(char *filename) {$/;"	f
 parsePostPipe	pipes/pipes.c	/^char** parsePostPipe(char *s, int *postCount) {$/;"	f
 parsePrePipe	pipes/pipes.c	/^char** parsePrePipe(char *s, int* preCount) {$/;"	f
 pipeIt	pipes/pipes.c	/^void pipeIt(char ** prePipe, char ** postPipe) {$/;"	f
@@ -81,12 +84,12 @@ printList	linkedlist/linkedList.c	/^void printList(const LinkedList * theList, v
 printTypeAlias	alias/alias.c	/^void printTypeAlias(void* passedIn) {$/;"	f
 printTypeHistory	history/history.c	/^void printTypeHistory(void* passedIn) {$/;"	f
 printargs	tokenize/makeArgs.c	/^void printargs(int argc, char **argv)$/;"	f
-processString	ush.c	/^void processString(char *string) {$/;"	f
+processString	cscd340Lab7.c	/^void processString(char *string) {$/;"	f
 removeFirst	linkedlist/linkedList.c	/^void removeFirst(LinkedList * theList, void (*removeData)(void *)) {$/;"	f
 removeItem	linkedlist/linkedList.c	/^void removeItem(LinkedList * theList, Node * nn, void (*removeData)(void *), $/;"	f
 removeLast	linkedlist/linkedList.c	/^void removeLast(LinkedList * theList, void (*removeData)(void *)) {$/;"	f
-setHistoryCounts	ush.c	/^void setHistoryCounts(FILE *fin, LinkedList *theList) {$/;"	f
-setHistoryCountsDefaults	ush.c	/^void setHistoryCountsDefaults() {$/;"	f
+setHistoryCounts	cscd340Lab7.c	/^void setHistoryCounts(FILE *fin, LinkedList *theList) {$/;"	f
+setHistoryCountsDefaults	cscd340Lab7.c	/^void setHistoryCountsDefaults() {$/;"	f
 size	linkedlist/linkedList.h	/^    int size;$/;"	m	struct:linkedlist
 sort	linkedlist/listUtils.c	/^void sort(LinkedList * theList, int (*compare)(const void *, const void *)) {$/;"	f
 strip	utils/myUtils.c	/^void strip(char *array)$/;"	f

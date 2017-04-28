@@ -161,12 +161,12 @@ void clearList(LinkedList * theList, void (*removeData)(void *)) {
 }
 void printList(const LinkedList * theList, void (*convertData)(void *)) {
 
-    if(theList ==  NULL) {
+    if(theList ==  NULL || theList->size == 0) {
         puts("Empty List");
         return;
     }
     Node *curr = theList->head->next;
-    //puts("-----------------------------------------");
+   // puts("-----------------------------------------");
     while(curr != theList->head) {
         convertData(curr->data);
         curr = curr->next;
