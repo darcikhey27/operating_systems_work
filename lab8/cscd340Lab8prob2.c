@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <unistd.h>
 
 #define MAX 10
-#define MAX_PRODUCER 5
-#define MAX_CONSUMER 2
 
 pthread_mutex_t the_mutex; // binary semaphore
 pthread_cond_t condc, condp; // counting metaphor producer and consumer
@@ -19,29 +16,16 @@ void * producer(void * ptr);
 int main(int argc, char ** argv) {
 
     num = 1;
-    pthread_t pro[MAX_PRODUCER];
-    pthread_t con[MAX_CONSUMER]; // producer, consurmer
+    pthread_t pro, con; // producer, consurmer
     pthread_mutex_init(&the_mutex, 0); // zero is NULL 
     pthread_cond_init(&condc, 0);
     pthread_cond_init(&condp, 0);
 
-    for(int i = 0; i < MAX_PRODUCER; i++) {
-        pthread_create(&pro[i], 0, producer,0);
-    }
-    for(int i = 0; i < MAX_CONSUMER; i++) {
-        pthread_create(&con[i], 0, consumer,0);
-    }
-    //pthread_create(&pro, 0, producer,0);
-    //pthread_create(&con, 0, consumer,0);
-    for(int i = 0; i < MAX_PRODUCER; i++) {
-        pthread_join(pro[i], 0);
-    }
-    //pthread_join(pro, 0);
-    
-    for(int i = 0; i < MAX_CONSUMER; i++) {
-        pthread_join(con[i], 0);
-    }
-//    pthread_join(con, 0);
+    pthread_create(&pro, 0, producer,0);
+    pthread_create(&con, 0, consumer,0);
+
+    pthread_join(pro, 0);
+    pthread_join(con, 0);
 
     pthread_cond_destroy(&condc);
     pthread_cond_destroy(&condp);
@@ -53,15 +37,13 @@ int main(int argc, char ** argv) {
 void * producer(void * ptr) {
     while(1) {
         pthread_mutex_lock(&the_mutex); // lock the mutex
+
         while(buffer[buffIndex] != 0) {
-            printf("Producer with thread_id %ld is waiting\n",
-                    pthread_self());
+            //puts("producer waiting");
             pthread_cond_wait(&condp, &the_mutex); // sending a wait
-            sleep(1);
         }
-        buffer[buffIndex] = num++;
-        printf("Producer with thread_id %ld produced widget %d\n",
-                pthread_self(), buffer[buffIndex]);
+        buffer[buffIndex] = (num++) * 2;
+        printf("Producing widget %d\n", buffer[buffIndex]);
 
         // send the wake up signal
         pthread_cond_signal(&condc);
@@ -76,13 +58,11 @@ void * consumer(void * ptr) {
         pthread_mutex_lock(&the_mutex); // lock the mutex
         while(buffer[buffIndex] <= 0) {
             // passing the producer
-            printf("Consumer with thread_id %ld is waiting\n",
-                    pthread_self());
+            //printf("Consumer waiting\n");
             pthread_cond_wait(&condc, &the_mutex); // sending a wait
-            sleep(1);
+
         }// end while
-        printf("Consumer with thread_id %ld is consuming widget %d\n",
-                pthread_self(), buffer[buffIndex]);
+        printf("Consuming widget %d\n", buffer[buffIndex]);
         buffer[buffIndex] = 0; 
         // send the wake up signal
         pthread_cond_signal(&condp);
