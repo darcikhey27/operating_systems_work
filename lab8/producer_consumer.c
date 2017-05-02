@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 #define MAX 10
-#define MAX_PRODUCER 5
-#define MAX_CONSUMER 2
+#define MAX_PRODUCER 2
+#define MAX_CONSUMER 4
 
 pthread_mutex_t the_mutex; // binary semaphore
 pthread_cond_t condc, condp; // counting metaphor producer and consumer
@@ -31,17 +31,13 @@ int main(int argc, char ** argv) {
     for(int i = 0; i < MAX_CONSUMER; i++) {
         pthread_create(&con[i], 0, consumer,0);
     }
-    //pthread_create(&pro, 0, producer,0);
-    //pthread_create(&con, 0, consumer,0);
     for(int i = 0; i < MAX_PRODUCER; i++) {
         pthread_join(pro[i], 0);
     }
-    //pthread_join(pro, 0);
     
     for(int i = 0; i < MAX_CONSUMER; i++) {
         pthread_join(con[i], 0);
     }
-//    pthread_join(con, 0);
 
     pthread_cond_destroy(&condc);
     pthread_cond_destroy(&condp);
@@ -57,7 +53,7 @@ void * producer(void * ptr) {
             printf("Producer with thread_id %ld is waiting\n",
                     pthread_self());
             pthread_cond_wait(&condp, &the_mutex); // sending a wait
-            sleep(1);
+            //sleep(1);
         }
         buffer[buffIndex] = num++;
         printf("Producer with thread_id %ld produced widget %d\n",
