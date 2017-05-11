@@ -53,9 +53,10 @@ void * producer(void * ptr) {
             printf("Producer with thread_id %ld is waiting\n",
                     pthread_self());
             pthread_cond_wait(&condp, &the_mutex); // sending a wait
-            //sleep(1);
+            sleep(1);
         }
         buffer[buffIndex] = num++;
+        //buffIndex++;
         printf("Producer with thread_id %ld produced widget %d\n",
                 pthread_self(), buffer[buffIndex]);
 

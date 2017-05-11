@@ -75,7 +75,7 @@ void * consumer(void * ptr) {
             printf("Consumer with thread_id %ld is waiting\n",
                     pthread_self());
             pthread_cond_wait(&condc, &the_mutex); // sending a wait
-            //sleep(1);
+            sleep(1);
         }// end while
         printf("Consumer with thread_id %ld is consuming widget %d\n",
                 pthread_self(), buffer[buffIndex]);

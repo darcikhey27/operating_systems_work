@@ -57,7 +57,7 @@ void * producer(void * ptr) {
             printf("Producer with thread_id %ld is waiting\n",
                     pthread_self());
             pthread_cond_wait(&condp, &the_mutex); // sending a wait
-            //sleep(1);
+            sleep(1);
         }
         buffer[buffIndex] = num++;
         printf("Producer with thread_id %ld produced widget %d\n",
@@ -79,7 +79,7 @@ void * consumer(void * ptr) {
             printf("Consumer with thread_id %ld is waiting\n",
                     pthread_self());
             pthread_cond_wait(&condc, &the_mutex); // sending a wait
-            //sleep(1);
+            sleep(1);
         }// end while
         printf("Consumer with thread_id %ld is consuming widget %d\n",
                 pthread_self(), buffer[buffIndex]);
