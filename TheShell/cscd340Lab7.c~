@@ -27,7 +27,6 @@ int main() {
 
     if(fin != NULL) {
         //puts("fin is not null");
-        
         setHistoryCounts(fin, aliasList);
         fclose(fin);
         fin = NULL;
