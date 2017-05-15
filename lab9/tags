@@ -1,0 +1,33 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CSCD340LAB9_H	cscd340Lab9.h	2;"	d
+MAX	utils/myUtils.h	17;"	d
+MYUTILS_H	utils/myUtils.h	11;"	d
+PAGES	cscd340Lab9.c	/^int32_t PAGES;$/;"	v
+PAGE_FRAMES	cscd340Lab9.c	/^int32_t PAGE_FRAMES;$/;"	v
+PF	cscd340Lab9.h	/^typedef struct pageFrame PF;$/;"	t	typeref:struct:pageFrame
+PTE	cscd340Lab9.h	/^typedef struct pageTableEntry PTE;$/;"	t	typeref:struct:pageTableEntry
+computePages	cscd340Lab9.c	/^int computePages(int type_size, int sizeOfPage) {$/;"	f
+countMemoryFile	cscd340Lab9.c	/^int countMemoryFile(FILE *fin) {$/;"	f
+curr	cscd340Lab9.c	/^int curr;$/;"	v
+curr	cscd340Lab9.h	/^    int curr;$/;"	m	struct:pageFrame
+displayPage	cscd340Lab9.c	/^int displayPage(int page, int address, int offset) {$/;"	f
+getOffset	cscd340Lab9.c	/^int getOffset(int sizeofPage) {$/;"	f
+getPageNumber	cscd340Lab9.c	/^int getPageNumber(int num, int offset) {$/;"	f
+isAvailablePageFrame	cscd340Lab9.c	/^int isAvailablePageFrame(PF *frameArray) {$/;"	f
+main	bitshuffle.c	/^int main() {$/;"	f
+main	cscd340Lab9.c	/^int main() {$/;"	f
+menu	utils/myUtils.c	/^int menu()$/;"	f
+page	cscd340Lab9.h	/^    int page;$/;"	m	struct:pageTableEntry
+pageFrame	cscd340Lab9.h	/^struct pageFrame {$/;"	s
+pageMappedTo	cscd340Lab9.h	/^    int pageMappedTo;$/;"	m	struct:pageFrame
+pageTableEntry	cscd340Lab9.h	/^struct pageTableEntry {$/;"	s
+presentBit	cscd340Lab9.h	/^    int presentBit;$/;"	m	struct:pageTableEntry
+processMemory	cscd340Lab9.c	/^void processMemory(int memCount, FILE* fin, int offset, PTE *pageArray, PF *frameArray) {$/;"	f
+readMemoryFile	cscd340Lab9.c	/^FILE* readMemoryFile() {$/;"	f
+setup	cscd340Lab9.c	/^void setup(int *VAS_size, int *PAS_size, int *sizeOfPage) {$/;"	f
+strip	utils/myUtils.c	/^void strip(char *array)$/;"	f

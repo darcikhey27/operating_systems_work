@@ -29,10 +29,17 @@ FILE* readMemoryFile();
 
 int countMemoryFile(FILE *fin);
 
-void processMemory(int memCount, FILE *fin, int offset, PTE *pageArray, PF *frameArray);
+void processMemory(int memCount, FILE *fin, int offset, 
+        PTE *pageArray, PF *frameArray);
 
 int isAvailablePageFrame(PF *frames);
 
 int getPageNumber(int n, int offset);
+
+int displayPage(int page, int address, int offset);
+
+void initPages(PTE *pages, int size);
+
+void initFrames(PF *frames, int size);
 
 #endif

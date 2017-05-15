@@ -1,34 +1,46 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <string.h>
 #include <math.h>
 #include "cscd340Lab9.h"
 #include "utils/myUtils.h"
+
+
 int curr;
-int PAGES;
-int PAGE_FRAMES;
+int32_t PAGES;
+int32_t PAGE_FRAMES;
+
+
 int main() {
     FILE *fin = NULL;
-    int VAS_size = 0;
-    int PAS_size = 0;
-    int sizeOfPage = 0;
+
+    uint32_t my_32bit_int;
+    uint32_t VAS_size = 0;
+    uint32_t PAS_size = 0;
+    uint32_t sizeOfPage = 0;
     curr = 0;
 
     setup(&VAS_size, &PAS_size, &sizeOfPage);
 
-    int offset = getOffset(sizeOfPage);
+    uint32_t offset = getOffset(sizeOfPage);
     //printf("offset is %d\n", offset);
-    int pages = computePages(VAS_size, sizeOfPage);
-    int pageFrames = computePages(PAS_size, sizeOfPage);
+    uint32_t pages = computePages(VAS_size, sizeOfPage);
+    uint32_t pageFrames = computePages(PAS_size, sizeOfPage);
     PAGES = pages;
     PAGE_FRAMES = pageFrames;
 
     PTE pagesArray[pages];
+
+    initPages(pagesArray, pages);
+
     PF pagesFrameArray[pageFrames];
+    initFrames(pagesFrameArray, pageFrames);
+
 
     // ask for the file two here
     fin = readMemoryFile();
-    int memCount = countMemoryFile(fin);
+    uint32_t memCount = countMemoryFile(fin);
 
     processMemory(memCount, fin, offset, pagesArray, pagesFrameArray);
 
@@ -38,40 +50,73 @@ int main() {
     fclose(fin);
     return 0;
 }
+void initFrames(PF *pagesFrameArray, int size) {
+
+    for(int i = 0; i < size; i++) {
+        pagesFrameArray[i].pageMappedTo = 0;
+    }
+}
+
+void initPages(PTE *pages, int size) {
+    for(int i = 0; i < size; i++) {
+        pages[i].page = 0;
+        pages[i].presentBit = 0;
+    }
+}
+
 void processMemory(int memCount, FILE* fin, int offset, PTE *pageArray, PF *frameArray) {
     // read an address and determine the page for that address
+    //printf("mem count %d\n", memCount);
+
     int address = 0;
     for(int i = 0; i <= memCount; i++) {
         fscanf(fin, "%d", &address);
         //determine page for this address
         //printf("adress: %d, hex: %x\n", address, address);
-
-        int pageNum = getPageNumber(address, offset);
+        uint32_t pageNum = getPageNumber(address, offset);
         //printf("pagenum: %d\n", pageNum);
-
-        if(pageArray[pageNum].presentBit != 1) {
-            //page is not mapped
-            int location = isAvailablePageFrame(frameArray);
-            
-            if(location -1) {
+        uint32_t location;
+        uint32_t page;
+        location = isAvailablePageFrame(frameArray);
+        if(pageArray[pageNum].presentBit != 1) { // if page is not mapped
+            if(location == -1) {
                 // evict(frameArray, curr)
                 // map(frame, curr);
                 perror("about to evict some stuff");
-                exit(-1);
+                //exit(-1);
             }
-            else {
-                //update(frameArray, pageNum);
+            else {// map it
+                pageArray[pageNum].presentBit = 1;
+                pageArray[pageNum].page = location;
+                frameArray[location].pageMappedTo = pageNum; 
             }
         } 
         else {
-            pageArray[pageNum].presentBit = 1;
-            
-        } 
-        printf("virtual address: %d\nPage Number: %d\nPage frame number: %d\nPysical Adress% d\n", 
-                address, pageNum, curr, 0);
-    }
+            // get the page frame, then concatenate to address off by offset
+            location = pageArray[pageNum].page;
+        }
+        //  printf("i = %d\n", i);
+        printf("virtual address: %d\nPage Number: %d\nPage frame number: %d\nPysical Adress% d\n\n", 
+                address, pageNum, location, displayPage(location, address, offset));
+    }//end for
     rewind(fin);
 }
+
+int displayPage(int page, int address, int offset) {
+
+    //printf("page: %d\n", page);
+    address = address << 24;
+
+    uint32_t left = page;
+    uint32_t right = (address >> 24);
+    //puts("----------------------------------");
+    //printf("left: %d right: %d\n", left, right);
+    //puts("----------------------------------");
+
+    printf("===================================\n"); 
+    return (left << 8)|right;
+}
+
 int isAvailablePageFrame(PF *frameArray) {
     int i;
     for(i = 0; i < PAGE_FRAMES; i++) {
@@ -84,11 +129,13 @@ int isAvailablePageFrame(PF *frameArray) {
         }
     }
 }
+
 int getPageNumber(int num, int offset) {
-    int retNum = num;
+    int32_t retNum = num;
     retNum = retNum >> offset;
     return retNum;
 }
+
 int countMemoryFile(FILE *fin) {
     int memoryCount = 0;
     char line[BUFSIZ];
@@ -99,9 +146,9 @@ int countMemoryFile(FILE *fin) {
         fgets(line, MAX, fin);
     }
     rewind(fin);
-    //printf("there are %d lines in file\n", memoryCount);
     return memoryCount;
 }
+
 FILE* readMemoryFile() {
     char filename[BUFSIZ];
     FILE *fin = NULL;
